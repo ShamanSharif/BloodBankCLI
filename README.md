@@ -24,7 +24,7 @@ to
 - [ ] Nurse Panel
 
 ### Students are on this Project
-Ashrifa Ashrab Joya 
-Tanjina Akter Sumi 
-Savrin Sharif 
-Shaman Sharif 
+- Ashrifa Ashrab Joya 
+- Savrin Sharif 
+- Shaman Sharif 
+- Tanjina Akter Sumi 
