@@ -127,6 +127,7 @@ void nurse(int id, char name[7], char blood[4]) {
             // printf("Enter C to continue ...\n");
             // scanf(" %c", &ch);
             // admin(id, name, blood);
+            nurse(id, name[7], blood[4]);
             break;
     }
 }
@@ -183,6 +184,7 @@ void pathologist(int id, char name[7], char blood[4]) {
             // printf("Enter C to continue ...\n");
             // scanf(" %c", &ch);
             // admin(id, name, blood);
+            pathologist(id, name[7], blood[4]);
             break;
     }
 }
@@ -367,6 +369,7 @@ void admin(int id, char name[7], char blood[4]) {
             // printf("Enter C to continue ...\n");
             // scanf(" %c", &ch);
             // admin(id, name, blood);
+            admin(id, name[7], blood[4]);
             break;
     }
 }
