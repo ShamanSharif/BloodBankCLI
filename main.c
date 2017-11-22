@@ -7,8 +7,42 @@
 // User List Database
 // Complete Pathologist Sub Function
 
+void userDatabase() {
+    FILE* file = fopen("userdata.txt", "r");
+    char line[256];
+
+    while(fgets(line, sizeof(line), file)) {
+        printf("%s", line);
+    }
+    fclose(file);
+}
+
 void addBlood() {
-    printf("Shoot\n");
+    // system("clear"); // system("cls") in windows
+    char name[7];
+    char blood[4];
+    int id, bags;
+    FILE* file = fopen("userdata.txt", "a");
+
+    printf("Enter Name (Must be in range 1 to 6, without space): ");
+    scanf("%s", &name);
+    printf("Enter Blood Group: ");
+    scanf("%s", &blood);
+    printf("Enter Id (Must be in range 1001 to 9999): ");
+    scanf("%d", &id);
+    printf("Enter Pin (Must Contain 4 DIGIT): ");
+    scanf("%d", &bags);
+    
+    
+    if(id > 10000 && bloodGroupValidation(blood)) {
+        fprintf(file, "%s \t%d \t%s \t%d\n", name, id, blood, bags);
+        printf("Successfully Added Blood\n");
+        fclose(file);
+    } else {
+        printf("Something Went Wrong. Check Your Form Again.\n");
+        fclose(file);
+        addBlood();
+    }
 }
 
 void bloodBank() {
@@ -20,7 +54,13 @@ void widrawBlood() {
 }
 
 void listDonators() {
-    printf("Donators List\n");
+    FILE* file = fopen("userdata.txt", "r");
+    char line[256];
+
+    while(fgets(line, sizeof(line), file)) {
+        printf("%s", line);
+    }
+    fclose(file);
 }
 
 void varificationList() {
@@ -148,6 +188,7 @@ void pathologist(int id, char name[7], char blood[4]) {
 }
 
 void goodbye() {
+    system("clear"); // system("cls") on Windows or DOS
     char ch;
     printf("Thank You Using Our Service.\n");
     printf("Enter Q for exit: ");
@@ -353,6 +394,7 @@ void checkLogin(int id, int pin) {
         sscanf(line,"%d %d %s %s", &dbid, &dbpn, &name, &blood);
         if(id == dbid && pin == dbpn) {
             printf("Login Successful\n");
+            fclose(file);
             checkType(dbid, name, blood);
             loginStatus = 1;
         }
@@ -365,10 +407,9 @@ void checkLogin(int id, int pin) {
         // printf("Enter Pin (Enter \"33\"): ");
         // scanf("%d", &pin);
         // checkLogin(id, pin);
+        fclose(file);
         login();
-    }
-
-    fclose(file);
+    } 
 }
 
 void login() {
