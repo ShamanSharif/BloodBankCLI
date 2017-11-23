@@ -46,7 +46,50 @@ void addBlood() {
 }
 
 void bloodBank() {
-    printf("Blood Bank\n");
+    int id, bags;
+    char name[7];
+    char blood[4];
+    int ap = 0, an = 0, bp = 0, bn = 0, abp = 0, abn = 0, op = 0, on = 0;
+    char apos[4] = "A+";
+    char aneg[4] = "A-";
+    char bpos[4] = "B+";
+    char bneg[4] = "B-";
+    char abpos[4] = "AB+";
+    char abneg[4] = "AB-";
+    char opos[4] = "O+";
+    char oneg[4] = "O-";
+    FILE* file = fopen("userdata.txt", "r");
+    char line[256];
+
+    while(fgets(line, sizeof(line), file)) {
+        sscanf(line, "%s %d %s %d", &name, &id, &blood, &bags);
+        if (strcasecmp(blood, apos) == 0) {
+            ap++;
+        } else if (strcasecmp(blood, aneg) == 0) {
+            an++;
+        } else if (strcasecmp(blood, bpos) == 0) {
+            bp++;
+        } else if (strcasecmp(blood, bneg) == 0) {
+            bn++;
+        } else if (strcasecmp(blood, abpos) == 0) {
+            abp++;
+        } else if (strcasecmp(blood, abneg) == 0) {
+            abn++;
+        } else if (strcasecmp(blood, opos) == 0) {
+            op++;
+        } else if (strcasecmp(blood, oneg) == 0) {
+            on++;
+        }
+    }
+    fclose(file);
+    printf("%s \t%d",apos, ap);
+    printf("%s \t%d",aneg, an);
+    printf("%s \t%d",bpos, bp);
+    printf("%s \t%d",bneg, bn);
+    printf("%s \t%d",abpos, abp);
+    printf("%s \t%d",abneg, abn);
+    printf("%s \t%d",opos, op);
+    printf("%s \t%d",oneg, on);
 }
 
 void widrawBlood() {
@@ -416,7 +459,7 @@ void checkLogin(int id, int pin) {
 }
 
 void login() {
-    system("clear"); // system("cls") in windows
+    // system("clear"); // system("cls") in windows
     int id, pin;
     printf("Enter ID (Or -1 to Exit): ");
     scanf("%d", &id);
