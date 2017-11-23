@@ -19,7 +19,7 @@ void userDatabase() {
 }
 
 void addBlood() {
-    // system("clear"); // system("cls") in windows
+    // system("cls"); // system("cls") in windows
     char name[7];
     char blood[4];
     int id, bags;
@@ -69,7 +69,7 @@ void varificationList() {
 }
 
 void nurse(int id, char name[7], char blood[4]) {
-    system("clear"); // system("cls") in windows
+    system("cls"); // system("cls") in windows
     int choice;
     char ch;
     printf("Welcome %s\n", name);
@@ -79,7 +79,7 @@ void nurse(int id, char name[7], char blood[4]) {
     switch (choice) {
         case 1:
             printf("One\n");
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             addBlood();
             printf("Enter C to continue ...\n");
             scanf(" %c", &ch);
@@ -87,7 +87,7 @@ void nurse(int id, char name[7], char blood[4]) {
             break;
         case 2:
             printf("Two\n");
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             widrawBlood();
             printf("Enter C to continue ...\n");
             scanf(" %c", &ch);
@@ -95,7 +95,7 @@ void nurse(int id, char name[7], char blood[4]) {
             break;
         case 3:
             printf("Three\n");
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             listDonators();
             printf("Enter C to continue ...\n");
             scanf(" %c", &ch);
@@ -103,7 +103,7 @@ void nurse(int id, char name[7], char blood[4]) {
             break;
         case 4:
             printf("Four\n");
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             varificationList();
             printf("Enter C to continue ...\n");
             scanf(" %c", &ch);
@@ -111,7 +111,7 @@ void nurse(int id, char name[7], char blood[4]) {
             break;
         case 5:
             printf("Four\n");
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             bloodBank();
             printf("Enter C to continue ...\n");
             scanf(" %c", &ch);
@@ -119,7 +119,7 @@ void nurse(int id, char name[7], char blood[4]) {
             break;
         case 6:
             printf("Six\n");
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             printf("You are successfully logged out\n");
             login();
             break;
@@ -134,7 +134,7 @@ void nurse(int id, char name[7], char blood[4]) {
 }
 
 void pathologist(int id, char name[7], char blood[4]) {
-    system("clear"); // system("cls") in windows
+    system("cls"); // system("cls") in windows
     int choice;
     char ch;
     printf("Welcome %s\n", name);
@@ -144,7 +144,7 @@ void pathologist(int id, char name[7], char blood[4]) {
     switch (choice) {
         case 1:
             printf("One\n");
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             // listAllPathologist();
             printf("Enter C to continue ...\n");
             scanf(" %c", &ch);
@@ -152,7 +152,7 @@ void pathologist(int id, char name[7], char blood[4]) {
             break;
         case 2:
             printf("Two\n");
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             // listAllNurse();
             printf("Enter C to continue ...\n");
             scanf(" %c", &ch);
@@ -160,7 +160,7 @@ void pathologist(int id, char name[7], char blood[4]) {
             break;
         case 3:
             printf("Three\n");
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             // addPathologist();
             printf("Enter C to continue ...\n");
             scanf(" %c", &ch);
@@ -168,7 +168,7 @@ void pathologist(int id, char name[7], char blood[4]) {
             break;
         case 4:
             printf("Four\n");
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             // addNurse();
             printf("Enter C to continue ...\n");
             scanf(" %c", &ch);
@@ -176,7 +176,7 @@ void pathologist(int id, char name[7], char blood[4]) {
             break;
         case 5:
             printf("Five\n");
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             printf("You are successfully logged out\n");
             login();
             break;
@@ -191,12 +191,12 @@ void pathologist(int id, char name[7], char blood[4]) {
 }
 
 void goodbye() {
-    system("clear"); // system("cls") on Windows or DOS
+    system("cls"); // system("cls") on Windows or DOS
     char ch;
     printf("Thank You Using Our Service.\n");
     printf("Enter Q for exit: ");
     scanf(" %c", ch);
-    system("clear");
+    system("cls");
     exit(0);
 }
 
@@ -231,7 +231,7 @@ int bloodGroupValidation(char blood[4]) {
 }
 
 void addNurse() {
-    // system("clear"); // system("cls") in windows
+    // system("cls"); // system("cls") in windows
     int id, pin;
     char name[7];
     char blood[4];
@@ -257,7 +257,7 @@ void addNurse() {
 }
 
 void addPathologist() {
-    // system("clear"); // system("cls") in windows
+    // system("cls"); // system("cls") in windows
     int id, pin;
     char name[7];
     char blood[4];
@@ -283,7 +283,7 @@ void addPathologist() {
 }
 
 void listAllNurse() {
-    // system("clear"); // system("cls") in windows
+    // system("cls"); // system("cls") in windows
     int dbid, dbpn;
     char name[7];
     char blood[4];
@@ -301,7 +301,7 @@ void listAllNurse() {
 }
 
 void listAllPathologist() {
-    // system("clear"); // system("cls") in windows
+    // system("cls"); // system("cls") in windows
     int dbid, dbpn;
     char name[7];
     char blood[4];
@@ -319,7 +319,7 @@ void listAllPathologist() {
 }
 
 void admin(int id, char name[7], char blood[4]) {
-    system("clear"); // system("cls") in windows
+    system("cls"); // system("cls") in windows
     int choice;
     char ch;
     printf("Welcome %s\n", name);
@@ -329,7 +329,7 @@ void admin(int id, char name[7], char blood[4]) {
     switch (choice) {
         case 1:
             printf("One\n");
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             listAllPathologist();
             printf("Enter C to continue ...\n");
             scanf(" %c", &ch);
@@ -337,7 +337,7 @@ void admin(int id, char name[7], char blood[4]) {
             break;
         case 2:
             printf("Two\n");
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             listAllNurse();
             printf("Enter C to continue ...\n");
             scanf(" %c", &ch);
@@ -345,7 +345,7 @@ void admin(int id, char name[7], char blood[4]) {
             break;
         case 3:
             printf("Three\n");
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             addPathologist();
             printf("Enter C to continue ...\n");
             scanf(" %c", &ch);
@@ -353,7 +353,7 @@ void admin(int id, char name[7], char blood[4]) {
             break;
         case 4:
             printf("Four\n");
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             addNurse();
             printf("Enter C to continue ...\n");
             scanf(" %c", &ch);
@@ -361,7 +361,7 @@ void admin(int id, char name[7], char blood[4]) {
             break;
         case 5:
             printf("Five\n");
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             printf("You are successfully logged out\n");
             login();
             break;
@@ -417,7 +417,7 @@ void checkLogin(int id, int pin) {
 }
 
 void login() {
-    system("clear"); // system("cls") in windows
+    system("cls"); // system("cls") in windows
     int id, pin;
     printf("Enter ID (Or -1 to Exit): ");
     scanf("%d", &id);
@@ -428,7 +428,7 @@ void login() {
 }
 
 int main() {
-    system("clear"); // system("cls") in windows
+    system("cls"); // system("cls") in windows
     int a;
 
     printf("Welcome to Blood Bank Management System.\n");
@@ -437,7 +437,7 @@ int main() {
     printf("Enter '1' to login: ");
     scanf("%d", &a);
     if(a == 1) {
-        system("clear"); // system("cls") in windows
+        system("cls"); // system("cls") in windows
         login();
     }
     return 0;
