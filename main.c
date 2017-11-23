@@ -6,6 +6,7 @@
 // Complete Nurse sub Function
 // User List Database
 // Complete Pathologist Sub Function
+// Added Github
 
 void userDatabase() {
     FILE* file = fopen("userdata.txt", "r");
@@ -32,8 +33,8 @@ void addBlood() {
     scanf("%d", &id);
     printf("Enter Pin (Must Contain 4 DIGIT): ");
     scanf("%d", &bags);
-    
-    
+
+
     if(id > 10000 && bloodGroupValidation(blood)) {
         fprintf(file, "%s \t%d \t%s \t%d\n", name, id, blood, bags);
         printf("Successfully Added Blood\n");
@@ -412,7 +413,7 @@ void checkLogin(int id, int pin) {
         // checkLogin(id, pin);
         fclose(file);
         login();
-    } 
+    }
 }
 
 void login() {
@@ -432,12 +433,12 @@ int main() {
 
     printf("Welcome to Blood Bank Management System.\n");
     printf("Created By The Student Of Northern University\n");
-    
+
     printf("Enter '1' to login: ");
     scanf("%d", &a);
     if(a == 1) {
         system("clear"); // system("cls") in windows
         login();
-    } 
+    }
     return 0;
 }
