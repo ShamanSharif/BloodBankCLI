@@ -46,8 +46,7 @@ void addBlood() {
 }
 
 void bloodBank() {
-    int id, bags;
-    char name[7];
+    int bags;
     char blood[4];
     int ap = 0, an = 0, bp = 0, bn = 0, abp = 0, abn = 0, op = 0, on = 0;
     char apos[4] = "A+";
@@ -58,38 +57,39 @@ void bloodBank() {
     char abneg[4] = "AB-";
     char opos[4] = "O+";
     char oneg[4] = "O-";
-    FILE* file = fopen("userdata.txt", "r");
+    FILE* file = fopen("availableBlood.txt", "r");
     char line[256];
 
     while(fgets(line, sizeof(line), file)) {
-        sscanf(line, "%s %d %s %d", &name, &id, &blood, &bags);
-        if (strcasecmp(blood, apos) == 0) {
-            ap++;
-        } else if (strcasecmp(blood, aneg) == 0) {
-            an++;
-        } else if (strcasecmp(blood, bpos) == 0) {
-            bp++;
-        } else if (strcasecmp(blood, bneg) == 0) {
-            bn++;
-        } else if (strcasecmp(blood, abpos) == 0) {
-            abp++;
-        } else if (strcasecmp(blood, abneg) == 0) {
-            abn++;
-        } else if (strcasecmp(blood, opos) == 0) {
-            op++;
-        } else if (strcasecmp(blood, oneg) == 0) {
-            on++;
-        }
+        // sscanf(line, "%s %d %s %d", &name, &id, &blood, &bags);
+        // if (strcasecmp(blood, apos) == 0) {
+        //     ap++;
+        // } else if (strcasecmp(blood, aneg) == 0) {
+        //     an++;
+        // } else if (strcasecmp(blood, bpos) == 0) {
+        //     bp++;
+        // } else if (strcasecmp(blood, bneg) == 0) {
+        //     bn++;
+        // } else if (strcasecmp(blood, abpos) == 0) {
+        //     abp++;
+        // } else if (strcasecmp(blood, abneg) == 0) {
+        //     abn++;
+        // } else if (strcasecmp(blood, opos) == 0) {
+        //     op++;
+        // } else if (strcasecmp(blood, oneg) == 0) {
+        //     on++;
+        // }
+        printf("%s", line);
     }
     fclose(file);
-    printf("%s \t%d",apos, ap);
-    printf("%s \t%d",aneg, an);
-    printf("%s \t%d",bpos, bp);
-    printf("%s \t%d",bneg, bn);
-    printf("%s \t%d",abpos, abp);
-    printf("%s \t%d",abneg, abn);
-    printf("%s \t%d",opos, op);
-    printf("%s \t%d",oneg, on);
+    // printf("%s \t%d\n",apos, ap);
+    // printf("%s \t%d\n",aneg, an);
+    // printf("%s \t%d\n",bpos, bp);
+    // printf("%s \t%d\n",bneg, bn);
+    // printf("%s \t%d\n",abpos, abp);
+    // printf("%s \t%d\n",abneg, abn);
+    // printf("%s \t%d\n",opos, op);
+    // printf("%s \t%d\n",oneg, on);
 }
 
 void widrawBlood() {
@@ -106,8 +106,25 @@ void listDonators() {
     fclose(file);
 }
 
-void varificationList() {
+int idCheck(int id) {
     printf("Yet to be varified\n");
+    int dbid, dbpn;
+    char name[7];
+    char blood[4];
+    FILE* file = fopen("database.txt", "r");
+    char line[256];
+
+    printf("ID \tPIN \tNAME \tBlood Group\n");
+    printf("----------------------------------------------\n");
+    while(fgets(line, sizeof(line), file)) {
+        sscanf(line,"%d %d %s %s", &dbid, &dbpn, &name, &blood);
+        if(id == dbid) {
+            fclose(file);
+            return 0;
+        }
+    }
+    fclose(file);
+    return 1;
 }
 
 void nurse(int id, char name[7], char blood[4]) {
@@ -279,7 +296,7 @@ void addNurse() {
     scanf("%s", &name);
     printf("Enter Blood Group: ");
     scanf("%s", &blood);
-    if(id > 1000 && id < 10000 && pin > 999 && pin < 10000 && bloodGroupValidation(blood)) {
+    if(idCheck(id) && id > 1000 && id < 10000 && pin > 999 && pin < 10000 && bloodGroupValidation(blood)) {
         fprintf(file, "%d \t%d \t%s \t\t%s\n", id, pin, name, blood);
         printf("Successfully Created Nurse\n");
         fclose(file);
