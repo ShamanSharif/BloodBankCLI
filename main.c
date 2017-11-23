@@ -232,15 +232,7 @@ void pathologist(int id, char name[7], char blood[4]) {
     }
 }
 
-void goodbye() {
-    system("clear"); // system("cls") on Windows or DOS
-    char ch;
-    printf("Thank You Using Our Service.\n");
-    printf("Enter Q for exit: ");
-    scanf(" %c", ch);
-    system("clear");
-    exit(0);
-}
+
 
 int bloodGroupValidation(char blood[4]) {
     char apos[4] = "A+";
@@ -467,6 +459,16 @@ void login() {
     printf("Enter Pin: ");
     scanf("%d", &pin);
     checkLogin(id, pin);
+}
+
+void goodbye() {
+    system("clear"); // system("cls") on Windows or DOS
+    char ch;
+    printf("Thank You Using Our Service.\n");
+    printf("Enter Q for exit: ");
+    scanf(" %c", ch);
+    system("clear");
+    exit(0);
 }
 
 int main() {
