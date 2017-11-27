@@ -4,7 +4,7 @@
 
 // Master Admin
 // Complete Nurse sub Function
-// User List Database
+// User List Database :: DONE
 // Complete Pathologist Sub Function
 
 void availableBloodIncrement(char bld[]) {

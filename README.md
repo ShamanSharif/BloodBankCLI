@@ -1,4 +1,4 @@
-## Blood Bank DOS Application
+# Blood Bank DOS Application
 
 This is a simple Blood Bank Management Application For my University Project.
 It is completely written in **C**
@@ -18,10 +18,13 @@ to
     printf("Created by {YOUR_COMPANY_NAME_HERE}.\n");
 ```
 
-### Tasks
+### This Program Includes
 - [x] Admin Panel
 - [ ] Pathologist Panel
-- [ ] Nurse Panel
+- [X] Nurse Panel
+
+### What can you do with program
+
 
 ### Students are on this Project
 - Ashrifa Ashrab Joya 
