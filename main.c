@@ -7,11 +7,68 @@
 // User List Database
 // Complete Pathologist Sub Function
 
+void totalDonationIncrement(int id) {
+    FILE* file = fopen("userdata.txt", "r");
+    FILE* fp = fopen("temp.txt", "w");
+    char line[256];
+    char name[7];
+    char blood[4];
+    int dbid, bags;
+
+    while(fgets(line, sizeof(line), file)) {
+        sscanf(line, "%s %d %s %d", &name, &dbid, &blood, &bags);
+
+        if(id == dbid) fprintf(file, "%s \t%d \t%s \t%d\n", name, id, blood, ++bags);
+        else fprintf(fp, "%s", line);
+    }
+    fclose(file);
+    fclose(fp);
+}
+
+int usrIdDuplicate(int id) {
+    char name[7];
+    char blood[4];
+    int dbid, bags;
+    FILE* file = fopen("userdata.txt", "r");
+    char line[256];
+    int status = 1;
+
+    while(fgets(line, sizeof(line), file)) {
+        sscanf(line, "%s %d %s %d", &name, &dbid, &blood, &bags);
+        if (id == dbid) status = 0;
+    }
+    fclose(file);
+
+    return status;
+}
+
 void userDatabase() {
     FILE* file = fopen("userdata.txt", "r");
     char line[256];
 
     while(fgets(line, sizeof(line), file)) {
+        printf("%s", line);
+    }
+    fclose(file);
+}
+
+void addAvailableBlood(int bags, char blood[4]) {
+    char dbblood[4];
+    int dbbags;
+    int ap = 0, an = 0, bp = 0, bn = 0, abp = 0, abn = 0, op = 0, on = 0;
+    char apos[4] = "A+";
+    char aneg[4] = "A-";
+    char bpos[4] = "B+";
+    char bneg[4] = "B-";
+    char abpos[4] = "AB+";
+    char abneg[4] = "AB-";
+    char opos[4] = "O+";
+    char oneg[4] = "O-";
+    FILE* file = fopen("availableBlood.txt", "r");
+    char line[256];
+
+    while(fgets(line, sizeof(line), file)) {
+        sscanf(line,"%s %d", &dbblood, &dbbags);
         printf("%s", line);
     }
     fclose(file);
@@ -30,12 +87,16 @@ void addBlood() {
     scanf("%s", &blood);
     printf("Enter Id (Must be in range 1001 to 9999): ");
     scanf("%d", &id);
-    printf("Enter Pin (Must Contain 4 DIGIT): ");
+    printf("Enter Bag: ");
     scanf("%d", &bags);
     
     
-    if(id > 10000 && bloodGroupValidation(blood)) {
+    if(id > 10000 && bloodGroupValidation(blood) && usrIdDuplicate(id)) {
         fprintf(file, "%s \t%d \t%s \t%d\n", name, id, blood, bags);
+        printf("Successfully Added Blood\n");
+        fclose(file);
+    } else if(id > 10000 && bloodGroupValidation(blood) && !usrIdDuplicate(id)) {
+        totalDonationIncrement(id);
         printf("Successfully Added Blood\n");
         fclose(file);
     } else {
@@ -61,35 +122,9 @@ void bloodBank() {
     char line[256];
 
     while(fgets(line, sizeof(line), file)) {
-        // sscanf(line, "%s %d %s %d", &name, &id, &blood, &bags);
-        // if (strcasecmp(blood, apos) == 0) {
-        //     ap++;
-        // } else if (strcasecmp(blood, aneg) == 0) {
-        //     an++;
-        // } else if (strcasecmp(blood, bpos) == 0) {
-        //     bp++;
-        // } else if (strcasecmp(blood, bneg) == 0) {
-        //     bn++;
-        // } else if (strcasecmp(blood, abpos) == 0) {
-        //     abp++;
-        // } else if (strcasecmp(blood, abneg) == 0) {
-        //     abn++;
-        // } else if (strcasecmp(blood, opos) == 0) {
-        //     op++;
-        // } else if (strcasecmp(blood, oneg) == 0) {
-        //     on++;
-        // }
         printf("%s", line);
     }
     fclose(file);
-    // printf("%s \t%d\n",apos, ap);
-    // printf("%s \t%d\n",aneg, an);
-    // printf("%s \t%d\n",bpos, bp);
-    // printf("%s \t%d\n",bneg, bn);
-    // printf("%s \t%d\n",abpos, abp);
-    // printf("%s \t%d\n",abneg, abn);
-    // printf("%s \t%d\n",opos, op);
-    // printf("%s \t%d\n",oneg, on);
 }
 
 void widrawBlood() {
@@ -163,7 +198,7 @@ void nurse(int id, char name[7], char blood[4]) {
         case 4:
             printf("Four\n");
             system("clear"); // system("cls") in windows
-            varificationList();
+            //varificationList();
             printf("Enter C to continue ...\n");
             scanf(" %c", &ch);
             nurse(id, name, blood);
@@ -418,9 +453,6 @@ void admin(int id, char name[7], char blood[4]) {
             break;
         default:
             printf("Incorrect Input\n");
-            // printf("Enter C to continue ...\n");
-            // scanf(" %c", &ch);
-            // admin(id, name, blood);
             admin(id, name[7], blood[4]);
             break;
     }
@@ -457,11 +489,6 @@ void checkLogin(int id, int pin) {
 
     if(!loginStatus) {
         printf("Unauthorised access\n");
-        // printf("Enter ID (Enter \"10\"): ");
-        // scanf("%d", &id);
-        // printf("Enter Pin (Enter \"33\"): ");
-        // scanf("%d", &pin);
-        // checkLogin(id, pin);
         fclose(file);
         login();
     } 

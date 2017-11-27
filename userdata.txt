@@ -9,3 +9,4 @@ Rahul 	10001 	B+ 	1
 Saru 	10001 	B+ 	1
 JDoe 	10001 	A+ 	1
 Rafi 	10001 	AB+ 	0
+Karin 	10003 	B+ 	1
