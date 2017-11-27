@@ -1,4 +1,4 @@
-0000    0000    ##########  ####
+ID      Pass    Name        Group
 29      3232    Rafin       O+
 101     5568    Neon        N+
 1001    5236    Shahri      S+

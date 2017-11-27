@@ -7,7 +7,35 @@
 // User List Database
 // Complete Pathologist Sub Function
 
-void totalDonationIncrement(int id) {
+void availableBloodIncrement(char bld[]) {
+    FILE* file = fopen("availableBlood.txt", "r");
+    FILE* fp = fopen("temp.txt", "w");
+    char line[256];
+    char name[7];
+    char blood[4];
+    int dbid, bags;
+
+    while(fgets(line, sizeof(line), file)) {
+        sscanf(line, "%s %d", &blood, &bags);
+
+        if(strcmp(bld, blood) == 0) fprintf(fp, "%s \t%d\n", blood, ++bags);
+        else fprintf(fp, "%s", line);
+    }
+    fclose(file);
+    fclose(fp);
+
+    file = fopen("availableBlood.txt", "w");
+    fp = fopen("temp.txt", "r");
+
+    while(fgets(line, sizeof(line), fp)) {
+        fprintf(file, "%s", line);
+    }
+
+    fclose(file);
+    fclose(fp);
+}
+
+void totalDonationIncrement(int id, int bag) {
     FILE* file = fopen("userdata.txt", "r");
     FILE* fp = fopen("temp.txt", "w");
     char line[256];
@@ -18,8 +46,21 @@ void totalDonationIncrement(int id) {
     while(fgets(line, sizeof(line), file)) {
         sscanf(line, "%s %d %s %d", &name, &dbid, &blood, &bags);
 
-        if(id == dbid) fprintf(file, "%s \t%d \t%s \t%d\n", name, id, blood, ++bags);
-        else fprintf(fp, "%s", line);
+        if(id == dbid) {
+            bags = bags + bag;
+            fprintf(fp, "%s \t%d \t%s \t%d\n", name, id, blood, bags);
+        }
+        else
+            fprintf(fp, "%s", line);
+    }
+    fclose(file);
+    fclose(fp);
+
+    file = fopen("userdata.txt", "w");
+    fp = fopen("temp.txt", "r");
+
+    while(fgets(line, sizeof(line), fp)) {
+        fprintf(file, "%s", line);
     }
     fclose(file);
     fclose(fp);
@@ -52,34 +93,34 @@ void userDatabase() {
     fclose(file);
 }
 
-void addAvailableBlood(int bags, char blood[4]) {
-    char dbblood[4];
-    int dbbags;
-    int ap = 0, an = 0, bp = 0, bn = 0, abp = 0, abn = 0, op = 0, on = 0;
-    char apos[4] = "A+";
-    char aneg[4] = "A-";
-    char bpos[4] = "B+";
-    char bneg[4] = "B-";
-    char abpos[4] = "AB+";
-    char abneg[4] = "AB-";
-    char opos[4] = "O+";
-    char oneg[4] = "O-";
-    FILE* file = fopen("availableBlood.txt", "r");
-    char line[256];
+// void addAvailableBlood(int bags, char blood[4]) {
+//     char dbblood[4];
+//     int dbbags;
+//     int ap = 0, an = 0, bp = 0, bn = 0, abp = 0, abn = 0, op = 0, on = 0;
+//     char apos[4] = "A+";
+//     char aneg[4] = "A-";
+//     char bpos[4] = "B+";
+//     char bneg[4] = "B-";
+//     char abpos[4] = "AB+";
+//     char abneg[4] = "AB-";
+//     char opos[4] = "O+";
+//     char oneg[4] = "O-";
+//     FILE* file = fopen("availableBlood.txt", "r");
+//     char line[256];
 
-    while(fgets(line, sizeof(line), file)) {
-        sscanf(line,"%s %d", &dbblood, &dbbags);
-        printf("%s", line);
-    }
-    fclose(file);
-}
+//     while(fgets(line, sizeof(line), file)) {
+//         sscanf(line,"%s %d", &dbblood, &dbbags);
+//         printf("%s", line);
+//     }
+//     fclose(file);
+// }
 
 void addBlood() {
     // system("clear"); // system("cls") in windows
     char name[7];
     char blood[4];
     int id, bags;
-    FILE* file = fopen("userdata.txt", "a");
+
 
     printf("Enter Name (Must be in range 1 to 6, without space): ");
     scanf("%s", &name);
@@ -89,35 +130,36 @@ void addBlood() {
     scanf("%d", &id);
     printf("Enter Bag: ");
     scanf("%d", &bags);
-    
-    
+
+
     if(id > 10000 && bloodGroupValidation(blood) && usrIdDuplicate(id)) {
+        FILE* file = fopen("userdata.txt", "a");
         fprintf(file, "%s \t%d \t%s \t%d\n", name, id, blood, bags);
         printf("Successfully Added Blood\n");
         fclose(file);
+        availableBloodIncrement(blood);
     } else if(id > 10000 && bloodGroupValidation(blood) && !usrIdDuplicate(id)) {
-        totalDonationIncrement(id);
+        totalDonationIncrement(id, bags);
         printf("Successfully Added Blood\n");
-        fclose(file);
+        availableBloodIncrement(blood);
     } else {
         printf("Something Went Wrong. Check Your Form Again.\n");
-        fclose(file);
         addBlood();
     }
 }
 
 void bloodBank() {
-    int bags;
-    char blood[4];
-    int ap = 0, an = 0, bp = 0, bn = 0, abp = 0, abn = 0, op = 0, on = 0;
-    char apos[4] = "A+";
-    char aneg[4] = "A-";
-    char bpos[4] = "B+";
-    char bneg[4] = "B-";
-    char abpos[4] = "AB+";
-    char abneg[4] = "AB-";
-    char opos[4] = "O+";
-    char oneg[4] = "O-";
+    // int bags;
+    // char blood[4];
+    // int ap = 0, an = 0, bp = 0, bn = 0, abp = 0, abn = 0, op = 0, on = 0;
+    // char apos[4] = "A+";
+    // char aneg[4] = "A-";
+    // char bpos[4] = "B+";
+    // char bneg[4] = "B-";
+    // char abpos[4] = "AB+";
+    // char abneg[4] = "AB-";
+    // char opos[4] = "O+";
+    // char oneg[4] = "O-";
     FILE* file = fopen("availableBlood.txt", "r");
     char line[256];
 
@@ -128,7 +170,42 @@ void bloodBank() {
 }
 
 void widrawBlood() {
-    printf("Widraw Blood\n");
+    int bag;
+    char bld[4];
+    printf("Which Group: ");
+    scanf("%s", bld);
+    printf("How many bags: ");
+    scanf("%d", &bag);
+
+    FILE* file = fopen("availableBlood.txt", "r");
+    FILE* fp = fopen("temp.txt", "w");
+    char line[256];
+    char blood[4];
+    int bags;
+
+    while(fgets(line, sizeof(line), file)) {
+        sscanf(line, "%s %d", &blood, &bags);
+
+        if(strcmp(bld, blood) == 0) {
+            bags = bags - bag;
+            fprintf(fp, "%s \t%d\n", blood, bags);
+        }
+        else fprintf(fp, "%s", line);
+    }
+    fclose(file);
+    fclose(fp);
+
+    file = fopen("availableBlood.txt", "w");
+    fp = fopen("temp.txt", "r");
+
+    while(fgets(line, sizeof(line), fp)) {
+        fprintf(file, "%s", line);
+    }
+
+    fclose(file);
+    fclose(fp);
+
+    printf("Widrawn Completed\n");
 }
 
 void listDonators() {
@@ -491,7 +568,7 @@ void checkLogin(int id, int pin) {
         printf("Unauthorised access\n");
         fclose(file);
         login();
-    } 
+    }
 }
 
 void login() {
@@ -521,12 +598,12 @@ int main() {
 
     printf("Welcome to Blood Bank Management System.\n");
     printf("Created By The Student Of Northern University\n");
-    
+
     printf("Enter '1' to login: ");
     scanf("%d", &a);
     if(a == 1) {
         system("clear"); // system("cls") in windows
         login();
-    } 
+    }
     return 0;
 }

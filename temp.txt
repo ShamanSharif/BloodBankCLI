@@ -1,3 +1,9 @@
-Name    Id      Blood   Donation
-Suvo    10002   A+      1
-Karin 	10003 	B+ 	1
+Group   Bags
+A+      0
+A-      0
+B+ 	0
+B-      0
+AB+     0
+AB-     0
+O+      0
+O-      0
