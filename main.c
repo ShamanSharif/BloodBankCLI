@@ -1,11 +1,243 @@
 #include<stdio.h>
-#include <stdlib.h>
+#include<stdlib.h>
 #include<string.h>
 
 // Master Admin
 // Complete Nurse sub Function
-// User List Database :: DONE
 // Complete Pathologist Sub Function
+
+void admin();
+void pathologist();
+void nurse();
+
+void goodbye();
+void login();
+void checkLogin();
+void checkType();
+int bloodGroupValidation();
+int idCheck();
+
+void listAllPathologist();
+void listAllNurse();
+void addPathologist();
+void addNurse();
+
+void addToVerificationList();
+void listDonators();
+void widrawBlood();
+void bloodBank();
+void bloodBankQueue();
+
+void userDatabase();
+int usrIdDuplicate();
+
+void totalDonationIncrement();
+
+int main() {
+    system("clear"); // system("cls") in windows
+    int a;
+
+    printf("Welcome to Blood Bank Management System.\n");
+    printf("Created By The Student Of Northern University\n");
+
+    printf("Enter '1' to login: ");
+    scanf("%d", &a);
+    if(a == 1) {
+        system("clear"); // system("cls") in windows
+        login();
+    }
+    return 0;
+}
+
+
+// Main Function Section, MASTER ADMIN, ADMIN, NURSE, PATHOLOGIST..
+
+void admin(int id, char name[7], char blood[4]) {
+    system("clear"); // system("cls") in windows
+    int choice;
+    char ch;
+    printf("Welcome %s\n", name);
+    printf("================================\n");
+    printf("Enter 1 to list all Pathologist \nEnter 2 to list all Nurse \nEnter 3 to Add Pathologist \nEnter 4 to Add Nurse \nEnter 5 for Logout \n\n\n%s@bloodBank:~$ ", name);
+    scanf("%d", &choice);
+    switch (choice) {
+        case 1:
+            printf("One\n");
+            system("clear"); // system("cls") in windows
+            listAllPathologist();
+            printf("Enter C to continue ...\n");
+            scanf(" %c", &ch);
+            admin(id, name, blood);
+            break;
+        case 2:
+            printf("Two\n");
+            system("clear"); // system("cls") in windows
+            listAllNurse();
+            printf("Enter C to continue ...\n");
+            scanf(" %c", &ch);
+            admin(id, name, blood);
+            break;
+        case 3:
+            printf("Three\n");
+            system("clear"); // system("cls") in windows
+            addPathologist();
+            printf("Enter C to continue ...\n");
+            scanf(" %c", &ch);
+            admin(id, name, blood);
+            break;
+        case 4:
+            printf("Four\n");
+            system("clear"); // system("cls") in windows
+            addNurse();
+            printf("Enter C to continue ...\n");
+            scanf(" %c", &ch);
+            admin(id, name, blood);
+            break;
+        case 5:
+            printf("Five\n");
+            system("clear"); // system("cls") in windows
+            printf("You are successfully logged out\n");
+            login();
+            break;
+        default:
+            printf("Incorrect Input\n");
+            admin(id, name[7], blood[4]);
+            break;
+    }
+}
+
+void nurse(int id, char name[7], char blood[4]) {
+    system("clear"); // system("cls") in windows
+    int choice;
+    char ch;
+    printf("Welcome %s\n", name);
+    printf("================================\n");
+    printf("Enter 1 to add Blood to BloodBank \nEnter 2 to Use Blood from BloodBank \nEnter 3 to List all Donators \nEnter 4 to Check Still to Varified List \nEnter 5 to Check Blood Bank \nEnter 6 for Logout \n\n\n%s@bloodBank:~$ ", name);
+    scanf("%d", &choice);
+    switch (choice) {
+        case 1:
+            printf("One\n");
+            system("clear"); // system("cls") in windows
+            addToVerificationList();
+            printf("Enter C to continue ...\n");
+            scanf(" %c", &ch);
+            nurse(id, name, blood);
+            break;
+        case 2:
+            printf("Two\n");
+            system("clear"); // system("cls") in windows
+            widrawBlood();
+            printf("Enter C to continue ...\n");
+            scanf(" %c", &ch);
+            nurse(id, name, blood);
+            break;
+        case 3:
+            printf("Three\n");
+            system("clear"); // system("cls") in windows
+            listDonators();
+            printf("Enter C to continue ...\n");
+            scanf(" %c", &ch);
+            nurse(id, name, blood);
+            break;
+        case 4:
+            printf("Four\n");
+            system("clear"); // system("cls") in windows
+            //varificationList();
+            printf("Enter C to continue ...\n");
+            scanf(" %c", &ch);
+            nurse(id, name, blood);
+            break;
+        case 5:
+            printf("Four\n");
+            system("clear"); // system("cls") in windows
+            bloodBank();
+            printf("Enter C to continue ...\n");
+            scanf(" %c", &ch);
+            nurse(id, name, blood);
+            break;
+        case 6:
+            printf("Six\n");
+            system("clear"); // system("cls") in windows
+            printf("You are successfully logged out\n");
+            login();
+            break;
+        default:
+            printf("Incorrect Input\n");
+            // printf("Enter C to continue ...\n");
+            // scanf(" %c", &ch);
+            // admin(id, name, blood);
+            nurse(id, name[7], blood[4]);
+            break;
+    }
+}
+
+void pathologist(int id, char name[7], char blood[4]) {
+    system("clear"); // system("cls") in windows
+    int choice;
+    char ch;
+    printf("Welcome %s\n", name);
+    printf("================================\n");
+    printf("Enter 1 to list Unvarified Bloods \nEnter 2 to Check Blood Bank \nEnter 3 to Add Pathologist \nEnter 4 to Add Nurse \nEnter 5 for Logout \n\n\n%s@bloodBank:~$ ", name);
+    scanf("%d", &choice);
+    switch (choice) {
+        case 1:
+            system("clear"); // system("cls") in windows
+            bloodBankQueue();
+            printf("Enter C to continue ...\n");
+            scanf(" %c", &ch);
+            pathologist(id, name, blood);
+            break;
+        case 2:
+            printf("Two\n");
+            system("clear"); // system("cls") in windows
+            // listAllNurse();
+            printf("Enter C to continue ...\n");
+            scanf(" %c", &ch);
+            pathologist(id, name, blood);
+            break;
+        case 3:
+            printf("Three\n");
+            system("clear"); // system("cls") in windows
+            // addPathologist();
+            printf("Enter C to continue ...\n");
+            scanf(" %c", &ch);
+            pathologist(id, name, blood);
+            break;
+        case 4:
+            printf("Four\n");
+            system("clear"); // system("cls") in windows
+            // addNurse();
+            printf("Enter C to continue ...\n");
+            scanf(" %c", &ch);
+            pathologist(id, name, blood);
+            break;
+        case 5:
+            printf("Five\n");
+            system("clear"); // system("cls") in windows
+            printf("You are successfully logged out\n");
+            login();
+            break;
+        default:
+            printf("Incorrect Input\n");
+            // printf("Enter C to continue ...\n");
+            // scanf(" %c", &ch);
+            // admin(id, name, blood);
+            pathologist(id, name[7], blood[4]);
+            break;
+    }
+}
+
+// This is a mess ..........
+
+void bloodBankQueue() {
+    FILE* file = fopen("yetTocheck", "r");
+    char line[256];
+
+    while(fgets(line, sizeof(line), file)) {
+        printf("%s", line);
+    }
+    fclose(file);
+}
 
 void availableBloodIncrement(char bld[]) {
     FILE* file = fopen("availableBlood.txt", "r");
@@ -36,7 +268,7 @@ void availableBloodIncrement(char bld[]) {
 }
 
 void totalDonationIncrement(int id, int bag) {
-    FILE* file = fopen("userdata.txt", "r");
+    FILE* file = fopen("yetTocheck.txt", "r");
     FILE* fp = fopen("temp.txt", "w");
     char line[256];
     char name[7];
@@ -56,7 +288,7 @@ void totalDonationIncrement(int id, int bag) {
     fclose(file);
     fclose(fp);
 
-    file = fopen("userdata.txt", "w");
+    file = fopen("yetTocheck.txt", "w");
     fp = fopen("temp.txt", "r");
 
     while(fgets(line, sizeof(line), fp)) {
@@ -70,7 +302,7 @@ int usrIdDuplicate(int id) {
     char name[7];
     char blood[4];
     int dbid, bags;
-    FILE* file = fopen("userdata.txt", "r");
+    FILE* file = fopen("yetTocheck.txt", "r");
     char line[256];
     int status = 1;
 
@@ -115,7 +347,7 @@ void userDatabase() {
 //     fclose(file);
 // }
 
-void addBlood() {
+void addToVerificationList() {
     // system("clear"); // system("cls") in windows
     char name[7];
     char blood[4];
@@ -133,33 +365,51 @@ void addBlood() {
 
 
     if(id > 10000 && bloodGroupValidation(blood) && usrIdDuplicate(id)) {
-        FILE* file = fopen("userdata.txt", "a");
+        FILE* file = fopen("yetTocheck.txt", "a");
         fprintf(file, "%s \t%d \t%s \t%d\n", name, id, blood, bags);
-        printf("Successfully Added Blood\n");
+        printf("Successfully Added For Ckeckup\n");
         fclose(file);
-        availableBloodIncrement(blood);
     } else if(id > 10000 && bloodGroupValidation(blood) && !usrIdDuplicate(id)) {
         totalDonationIncrement(id, bags);
-        printf("Successfully Added Blood\n");
-        availableBloodIncrement(blood);
+        printf("Successfully Added For Checkup\n");
     } else {
         printf("Something Went Wrong. Check Your Form Again.\n");
-        addBlood();
+        addToVerificationList();
     }
 }
 
+// void addBlood() {
+//     // system("clear"); // system("cls") in windows
+//     char name[7];
+//     char blood[4];
+//     int id, bags;
+
+
+//     printf("Enter Name (Must be in range 1 to 6, without space): ");
+//     scanf("%s", &name);
+//     printf("Enter Blood Group: ");
+//     scanf("%s", &blood);
+//     printf("Enter Id (Must be in range 1001 to 9999): ");
+//     scanf("%d", &id);
+//     printf("Enter Bag: ");
+//     scanf("%d", &bags);
+
+
+//     if(id > 10000 && bloodGroupValidation(blood) && usrIdDuplicate(id)) {
+//         FILE* file = fopen("yetTocheck.txt", "a");
+//         fprintf(file, "%s \t%d \t%s \t%d\n", name, id, blood, bags);
+//         printf("Successfully Added Blood\n");
+//         fclose(file);
+//     } else if(id > 10000 && bloodGroupValidation(blood) && !usrIdDuplicate(id)) {
+//         totalDonationIncrement(id, bags);
+//         printf("Successfully Added Blood\n");
+//     } else {
+//         printf("Something Went Wrong. Check Your Form Again.\n");
+//         addBlood();
+//     }
+// }
+
 void bloodBank() {
-    // int bags;
-    // char blood[4];
-    // int ap = 0, an = 0, bp = 0, bn = 0, abp = 0, abn = 0, op = 0, on = 0;
-    // char apos[4] = "A+";
-    // char aneg[4] = "A-";
-    // char bpos[4] = "B+";
-    // char bneg[4] = "B-";
-    // char abpos[4] = "AB+";
-    // char abneg[4] = "AB-";
-    // char opos[4] = "O+";
-    // char oneg[4] = "O-";
     FILE* file = fopen("availableBlood.txt", "r");
     char line[256];
 
@@ -239,129 +489,6 @@ int idCheck(int id) {
     return 1;
 }
 
-void nurse(int id, char name[7], char blood[4]) {
-    system("clear"); // system("cls") in windows
-    int choice;
-    char ch;
-    printf("Welcome %s\n", name);
-    printf("================================\n");
-    printf("Enter 1 to add Blood to BloodBank \nEnter 2 to Use Blood from BloodBank \nEnter 3 to List all Donators \nEnter 4 to Check Still to Varified List \nEnter 5 to Check Blood Bank \nEnter 6 for Logout \n\n\n%s@bloodBank:~$ ", name);
-    scanf("%d", &choice);
-    switch (choice) {
-        case 1:
-            printf("One\n");
-            system("clear"); // system("cls") in windows
-            addBlood();
-            printf("Enter C to continue ...\n");
-            scanf(" %c", &ch);
-            nurse(id, name, blood);
-            break;
-        case 2:
-            printf("Two\n");
-            system("clear"); // system("cls") in windows
-            widrawBlood();
-            printf("Enter C to continue ...\n");
-            scanf(" %c", &ch);
-            nurse(id, name, blood);
-            break;
-        case 3:
-            printf("Three\n");
-            system("clear"); // system("cls") in windows
-            listDonators();
-            printf("Enter C to continue ...\n");
-            scanf(" %c", &ch);
-            nurse(id, name, blood);
-            break;
-        case 4:
-            printf("Four\n");
-            system("clear"); // system("cls") in windows
-            //varificationList();
-            printf("Enter C to continue ...\n");
-            scanf(" %c", &ch);
-            nurse(id, name, blood);
-            break;
-        case 5:
-            printf("Four\n");
-            system("clear"); // system("cls") in windows
-            bloodBank();
-            printf("Enter C to continue ...\n");
-            scanf(" %c", &ch);
-            nurse(id, name, blood);
-            break;
-        case 6:
-            printf("Six\n");
-            system("clear"); // system("cls") in windows
-            printf("You are successfully logged out\n");
-            login();
-            break;
-        default:
-            printf("Incorrect Input\n");
-            // printf("Enter C to continue ...\n");
-            // scanf(" %c", &ch);
-            // admin(id, name, blood);
-            nurse(id, name[7], blood[4]);
-            break;
-    }
-}
-
-void pathologist(int id, char name[7], char blood[4]) {
-    system("clear"); // system("cls") in windows
-    int choice;
-    char ch;
-    printf("Welcome %s\n", name);
-    printf("================================\n");
-    printf("Enter 1 to list Unvarified Bloods \nEnter 2 to Check Blood Bank \nEnter 3 to Add Pathologist \nEnter 4 to Add Nurse \nEnter 5 for Logout \n\n\n%s@bloodBank:~$ ", name);
-    scanf("%d", &choice);
-    switch (choice) {
-        case 1:
-            printf("One\n");
-            system("clear"); // system("cls") in windows
-            // listAllPathologist();
-            printf("Enter C to continue ...\n");
-            scanf(" %c", &ch);
-            pathologist(id, name, blood);
-            break;
-        case 2:
-            printf("Two\n");
-            system("clear"); // system("cls") in windows
-            // listAllNurse();
-            printf("Enter C to continue ...\n");
-            scanf(" %c", &ch);
-            pathologist(id, name, blood);
-            break;
-        case 3:
-            printf("Three\n");
-            system("clear"); // system("cls") in windows
-            // addPathologist();
-            printf("Enter C to continue ...\n");
-            scanf(" %c", &ch);
-            pathologist(id, name, blood);
-            break;
-        case 4:
-            printf("Four\n");
-            system("clear"); // system("cls") in windows
-            // addNurse();
-            printf("Enter C to continue ...\n");
-            scanf(" %c", &ch);
-            pathologist(id, name, blood);
-            break;
-        case 5:
-            printf("Five\n");
-            system("clear"); // system("cls") in windows
-            printf("You are successfully logged out\n");
-            login();
-            break;
-        default:
-            printf("Incorrect Input\n");
-            // printf("Enter C to continue ...\n");
-            // scanf(" %c", &ch);
-            // admin(id, name, blood);
-            pathologist(id, name[7], blood[4]);
-            break;
-    }
-}
-
-
 
 int bloodGroupValidation(char blood[4]) {
     char apos[4] = "A+";
@@ -434,7 +561,7 @@ void addPathologist() {
     scanf("%s", &name);
     printf("Enter Blood Group: ");
     scanf("%s", &blood);
-    if(id > 100 && id < 1000 && pin > 999 && pin < 10000 && bloodGroupValidation(blood)) {
+    if(idCheck(id) && id > 100 && id < 1000 && pin > 999 && pin < 10000 && bloodGroupValidation(blood)) {
         fprintf(file, "%d \t%d \t%s \t\t%s\n", id, pin, name, blood);
         printf("Successfully Created Pathologist\n");
         fclose(file);
@@ -481,59 +608,7 @@ void listAllPathologist() {
     }
 }
 
-void admin(int id, char name[7], char blood[4]) {
-    system("clear"); // system("cls") in windows
-    int choice;
-    char ch;
-    printf("Welcome %s\n", name);
-    printf("================================\n");
-    printf("Enter 1 to list all Pathologist \nEnter 2 to list all Nurse \nEnter 3 to Add Pathologist \nEnter 4 to Add Nurse \nEnter 5 for Logout \n\n\n%s@bloodBank:~$ ", name);
-    scanf("%d", &choice);
-    switch (choice) {
-        case 1:
-            printf("One\n");
-            system("clear"); // system("cls") in windows
-            listAllPathologist();
-            printf("Enter C to continue ...\n");
-            scanf(" %c", &ch);
-            admin(id, name, blood);
-            break;
-        case 2:
-            printf("Two\n");
-            system("clear"); // system("cls") in windows
-            listAllNurse();
-            printf("Enter C to continue ...\n");
-            scanf(" %c", &ch);
-            admin(id, name, blood);
-            break;
-        case 3:
-            printf("Three\n");
-            system("clear"); // system("cls") in windows
-            addPathologist();
-            printf("Enter C to continue ...\n");
-            scanf(" %c", &ch);
-            admin(id, name, blood);
-            break;
-        case 4:
-            printf("Four\n");
-            system("clear"); // system("cls") in windows
-            addNurse();
-            printf("Enter C to continue ...\n");
-            scanf(" %c", &ch);
-            admin(id, name, blood);
-            break;
-        case 5:
-            printf("Five\n");
-            system("clear"); // system("cls") in windows
-            printf("You are successfully logged out\n");
-            login();
-            break;
-        default:
-            printf("Incorrect Input\n");
-            admin(id, name[7], blood[4]);
-            break;
-    }
-}
+
 
 void checkType(int id, char name[7], char blood[4]) {
     if (id < 100) {
@@ -590,20 +665,4 @@ void goodbye() {
     scanf(" %c", ch);
     system("clear");
     exit(0);
-}
-
-int main() {
-    system("clear"); // system("cls") in windows
-    int a;
-
-    printf("Welcome to Blood Bank Management System.\n");
-    printf("Created By The Student Of Northern University\n");
-
-    printf("Enter '1' to login: ");
-    scanf("%d", &a);
-    if(a == 1) {
-        system("clear"); // system("cls") in windows
-        login();
-    }
-    return 0;
 }
