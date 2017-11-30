@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<unistd.h>
 
 // Master Admin
 // Complete Nurse sub Function
@@ -27,6 +28,8 @@ void listDonators();
 void widrawBlood();
 void bloodBank();
 void bloodBankQueue();
+
+void varifyBlood();
 
 void userDatabase();
 int usrIdDuplicate();
@@ -189,7 +192,7 @@ void pathologist(int id, char name[7], char blood[4]) {
         case 2:
             printf("Two\n");
             system("clear"); // system("cls") in windows
-            // listAllNurse();
+            bloodBank();
             printf("Enter C to continue ...\n");
             scanf(" %c", &ch);
             pathologist(id, name, blood);
@@ -218,9 +221,6 @@ void pathologist(int id, char name[7], char blood[4]) {
             break;
         default:
             printf("Incorrect Input\n");
-            // printf("Enter C to continue ...\n");
-            // scanf(" %c", &ch);
-            // admin(id, name, blood);
             pathologist(id, name[7], blood[4]);
             break;
     }
@@ -230,6 +230,7 @@ void pathologist(int id, char name[7], char blood[4]) {
 
 void varifyBlood(int id, char c){
     printf("Shit will happen here....\n");
+    sleep(2);
 }
 
 void bloodBankQueue() {
