@@ -32,6 +32,7 @@ void userDatabase();
 int usrIdDuplicate();
 
 void totalDonationIncrement();
+void totalVarificationIncrement();
 
 int main() {
     system("clear"); // system("cls") in windows
@@ -116,7 +117,6 @@ void nurse(int id, char name[7], char blood[4]) {
     scanf("%d", &choice);
     switch (choice) {
         case 1:
-            printf("One\n");
             system("clear"); // system("cls") in windows
             addToVerificationList();
             printf("Enter C to continue ...\n");
@@ -124,7 +124,6 @@ void nurse(int id, char name[7], char blood[4]) {
             nurse(id, name, blood);
             break;
         case 2:
-            printf("Two\n");
             system("clear"); // system("cls") in windows
             widrawBlood();
             printf("Enter C to continue ...\n");
@@ -132,7 +131,6 @@ void nurse(int id, char name[7], char blood[4]) {
             nurse(id, name, blood);
             break;
         case 3:
-            printf("Three\n");
             system("clear"); // system("cls") in windows
             listDonators();
             printf("Enter C to continue ...\n");
@@ -140,15 +138,13 @@ void nurse(int id, char name[7], char blood[4]) {
             nurse(id, name, blood);
             break;
         case 4:
-            printf("Four\n");
             system("clear"); // system("cls") in windows
-            //varificationList();
+            bloodBankQueue();
             printf("Enter C to continue ...\n");
             scanf(" %c", &ch);
             nurse(id, name, blood);
             break;
         case 5:
-            printf("Four\n");
             system("clear"); // system("cls") in windows
             bloodBank();
             printf("Enter C to continue ...\n");
@@ -156,16 +152,12 @@ void nurse(int id, char name[7], char blood[4]) {
             nurse(id, name, blood);
             break;
         case 6:
-            printf("Six\n");
             system("clear"); // system("cls") in windows
             printf("You are successfully logged out\n");
             login();
             break;
         default:
-            printf("Incorrect Input\n");
-            // printf("Enter C to continue ...\n");
-            // scanf(" %c", &ch);
-            // admin(id, name, blood);
+            printf("Incorrect Input\n");;
             nurse(id, name[7], blood[4]);
             break;
     }
@@ -183,8 +175,15 @@ void pathologist(int id, char name[7], char blood[4]) {
         case 1:
             system("clear"); // system("cls") in windows
             bloodBankQueue();
-            printf("Enter C to continue ...\n");
+            printf("Enter V to Varify or C to continue ...\n");
             scanf(" %c", &ch);
+            if(ch == 'V') {
+                int id;
+                char c;
+                printf("Enter ID<space>(V or U), V for Varify and U for Unvarify\n\n%s@bloodBank:~$ ", name);
+                scanf("%d %c", &id, &c);
+                varifyBlood(id, c);
+            }
             pathologist(id, name, blood);
             break;
         case 2:
@@ -229,8 +228,12 @@ void pathologist(int id, char name[7], char blood[4]) {
 
 // This is a mess ..........
 
+void varifyBlood(int id, char c){
+    printf("Shit will happen here....\n");
+}
+
 void bloodBankQueue() {
-    FILE* file = fopen("yetTocheck", "r");
+    FILE* file = fopen("yetTocheck.txt", "r");
     char line[256];
 
     while(fgets(line, sizeof(line), file)) {
@@ -268,6 +271,38 @@ void availableBloodIncrement(char bld[]) {
 }
 
 void totalDonationIncrement(int id, int bag) {
+    FILE* file = fopen("userdata.txt", "r");
+    FILE* fp = fopen("temp.txt", "w");
+    char line[256];
+    char name[7];
+    char blood[4];
+    int dbid, bags;
+
+    while(fgets(line, sizeof(line), file)) {
+        sscanf(line, "%s %d %s %d", &name, &dbid, &blood, &bags);
+
+        if(id == dbid) {
+            bags = bags + bag;
+            fprintf(fp, "%s \t%d \t%s \t%d\n", name, id, blood, bags);
+        }
+        else
+            fprintf(fp, "%s", line);
+    }
+    fclose(file);
+    fclose(fp);
+
+    file = fopen("userdata.txt", "w");
+    fp = fopen("temp.txt", "r");
+
+    while(fgets(line, sizeof(line), fp)) {
+        fprintf(file, "%s", line);
+    }
+    fclose(file);
+    fclose(fp);
+}
+
+
+void totalVarificationIncrement(int id, int bag) {
     FILE* file = fopen("yetTocheck.txt", "r");
     FILE* fp = fopen("temp.txt", "w");
     char line[256];
@@ -370,7 +405,7 @@ void addToVerificationList() {
         printf("Successfully Added For Ckeckup\n");
         fclose(file);
     } else if(id > 10000 && bloodGroupValidation(blood) && !usrIdDuplicate(id)) {
-        totalDonationIncrement(id, bags);
+        totalVarificationIncrement(id, bags);
         printf("Successfully Added For Checkup\n");
     } else {
         printf("Something Went Wrong. Check Your Form Again.\n");
@@ -469,7 +504,6 @@ void listDonators() {
 }
 
 int idCheck(int id) {
-    printf("Yet to be varified\n");
     int dbid, dbpn;
     char name[7];
     char blood[4];
