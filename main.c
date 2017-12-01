@@ -3,6 +3,9 @@
 #include<string.h>
 #include<unistd.h>
 
+#define RESET   "\033[0m"
+#define RED     "\033[31m"      /* Red */
+
 // Master Admin
 // Complete Nurse sub Function
 // Complete Pathologist Sub Function
@@ -40,6 +43,19 @@ void totalVarificationIncrement();
 int main() {
     system("clear"); // system("cls") in windows
     int a;
+
+    // ART
+
+    printf(RED "██████╗ ██╗      ██████╗  ██████╗ ██████╗     ██████╗  █████╗ ███╗   ██╗██╗  ██╗  \n" RESET );
+    printf(RED "██╔══██╗██║     ██╔═══██╗██╔═══██╗██╔══██╗    ██╔══██╗██╔══██╗████╗  ██║██║ ██╔╝   \n" RESET );
+    printf(RED "██████╔╝██║     ██║   ██║██║   ██║██║  ██║    ██████╔╝███████║██╔██╗ ██║█████╔╝    \n" RESET );
+    printf(RED "██╔══██╗██║     ██║   ██║██║   ██║██║  ██║    ██╔══██╗██╔══██║██║╚██╗██║██╔═██╗    \n" RESET );
+    printf(RED "██████╔╝███████╗╚██████╔╝╚██████╔╝██████╔╝    ██████╔╝██║  ██║██║ ╚████║██║  ██╗   \n" RESET );
+    printf(RED "╚═════╝ ╚══════╝ ╚═════╝  ╚═════╝ ╚═════╝     ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝    \n" RESET );
+    printf("\n");
+    printf("\n");
+
+    // ART
 
     printf("Welcome to Blood Bank Management System.\n");
     printf("Created By The Student Of Northern University\n");
@@ -172,7 +188,7 @@ void pathologist(int id, char name[7], char blood[4]) {
     char ch;
     printf("Welcome %s\n", name);
     printf("================================\n");
-    printf("Enter 1 to list Unvarified Bloods \nEnter 2 to Check Blood Bank \nEnter 3 to Add Pathologist \nEnter 4 to Add Nurse \nEnter 5 for Logout \n\n\n%s@bloodBank:~$ ", name);
+    printf("Enter 1 to list Unvarified Bloods \nEnter 2 to Check Blood Bank \nEnter 3 for Logout \n\n\n%s@bloodBank:~$ ", name);
     scanf("%d", &choice);
     switch (choice) {
         case 1:
@@ -199,22 +215,6 @@ void pathologist(int id, char name[7], char blood[4]) {
             break;
         case 3:
             printf("Three\n");
-            system("clear"); // system("cls") in windows
-            // addPathologist();
-            printf("Enter C to continue ...\n");
-            scanf(" %c", &ch);
-            pathologist(id, name, blood);
-            break;
-        case 4:
-            printf("Four\n");
-            system("clear"); // system("cls") in windows
-            // addNurse();
-            printf("Enter C to continue ...\n");
-            scanf(" %c", &ch);
-            pathologist(id, name, blood);
-            break;
-        case 5:
-            printf("Five\n");
             system("clear"); // system("cls") in windows
             printf("You are successfully logged out\n");
             login();
