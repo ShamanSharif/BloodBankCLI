@@ -272,7 +272,32 @@ void varifyBlood(int id, char c[2]) {
     }
 
     else if (c == 'U') {
-        printf("Vai maaF chai \n");
+        FILE* file = fopen("yetTocheck.txt", "r");
+        FILE* fp = fopen("temp2.txt", "w");
+        char line[256];
+        int dbid, bags;
+        char blood[4];
+        char name[7];
+
+        while(fgets(line, sizeof(line), file)) {
+            sscanf(line, "%s %d %s %d", &name, &dbid, &blood, &bags);
+            if(id == dbid) {
+                continue;
+            } else {
+                fprintf(fp, "%s", line);
+            }
+        }
+        fclose(file);
+        fclose(fp);
+
+        file = fopen("yetTocheck.txt", "w");
+        fp = fopen("temp2.txt", "r");
+
+        while(fgets(line, sizeof(line), fp)) {
+            fprintf(file, "%s", line);
+        }
+        fclose(file);
+        fclose(fp);
     }
     sleep(2);
 }
