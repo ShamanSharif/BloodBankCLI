@@ -228,10 +228,55 @@ void pathologist(int id, char name[7], char blood[4]) {
 
 // This is a mess ..........
 
-void varifyBlood(int id, char c){
-    printf("Shit will happen here....\n");
+void queueToData(int id, int bags, char blood[4], char name[7]) {
+    if(id > 10000 && bloodGroupValidation(blood) && userIdDuplicate(id)) {
+        FILE* file = fopen("yetTocheck.txt", "a");
+        fprintf(file, "%s \t%d \t%s \t%d\n", name, id, blood, bags);
+        printf("Successfully Added Blood\n");
+        fclose(file);
+    } else if(id > 10000 && bloodGroupValidation(blood) && !userIdDuplicate(id)) {
+        totalDonationIncrement(id, bags);
+        printf("Successfully Added Blood\n");
+    }
+}
+
+void varifyBlood(int id, char c[2]) {
+
+    if(c == 'V') {
+        FILE* file = fopen("yetTocheck.txt", "r");
+        FILE* fp = fopen("temp2.txt", "w");
+        char line[256];
+        int dbid, bags;
+        char blood[4];
+        char name[7];
+
+        while(fgets(line, sizeof(line), file)) {
+            sscanf(line, "%s %d %s %d", &name, &dbid, &blood, &bags);
+            if(id == dbid) {
+                queueToData(dbid, bags, blood, name);
+            } else {
+                fprintf(fp, "%s", line);
+            }
+        }
+        fclose(file);
+        fclose(fp);
+
+        file = fopen("yetTocheck.txt", "w");
+        fp = fopen("temp2.txt", "r");
+
+        while(fgets(line, sizeof(line), fp)) {
+            fprintf(file, "%s", line);
+        }
+        fclose(file);
+        fclose(fp);
+    }
+
+    else if (c == 'U') {
+        printf("Vai maaF chai \n");
+    }
     sleep(2);
 }
+
 
 void bloodBankQueue() {
     FILE* file = fopen("yetTocheck.txt", "r");
@@ -334,6 +379,23 @@ void totalVarificationIncrement(int id, int bag) {
     fclose(fp);
 }
 
+int userIdDuplicate(int id) {
+    char name[7];
+    char blood[4];
+    int dbid, bags;
+    FILE* file = fopen("userdata.txt", "r");
+    char line[256];
+    int status = 1;
+
+    while(fgets(line, sizeof(line), file)) {
+        sscanf(line, "%s %d %s %d", &name, &dbid, &blood, &bags);
+        if (id == dbid) status = 0;
+    }
+    fclose(file);
+
+    return status;
+}
+
 int usrIdDuplicate(int id) {
     char name[7];
     char blood[4];
@@ -414,36 +476,36 @@ void addToVerificationList() {
     }
 }
 
-// void addBlood() {
-//     // system("clear"); // system("cls") in windows
-//     char name[7];
-//     char blood[4];
-//     int id, bags;
+void addBlood() {
+    // system("clear"); // system("cls") in windows
+    char name[7];
+    char blood[4];
+    int id, bags;
 
 
-//     printf("Enter Name (Must be in range 1 to 6, without space): ");
-//     scanf("%s", &name);
-//     printf("Enter Blood Group: ");
-//     scanf("%s", &blood);
-//     printf("Enter Id (Must be in range 1001 to 9999): ");
-//     scanf("%d", &id);
-//     printf("Enter Bag: ");
-//     scanf("%d", &bags);
+    printf("Enter Name (Must be in range 1 to 6, without space): ");
+    scanf("%s", &name);
+    printf("Enter Blood Group: ");
+    scanf("%s", &blood);
+    printf("Enter Id (Must be in range 1001 to 9999): ");
+    scanf("%d", &id);
+    printf("Enter Bag: ");
+    scanf("%d", &bags);
 
 
-//     if(id > 10000 && bloodGroupValidation(blood) && usrIdDuplicate(id)) {
-//         FILE* file = fopen("yetTocheck.txt", "a");
-//         fprintf(file, "%s \t%d \t%s \t%d\n", name, id, blood, bags);
-//         printf("Successfully Added Blood\n");
-//         fclose(file);
-//     } else if(id > 10000 && bloodGroupValidation(blood) && !usrIdDuplicate(id)) {
-//         totalDonationIncrement(id, bags);
-//         printf("Successfully Added Blood\n");
-//     } else {
-//         printf("Something Went Wrong. Check Your Form Again.\n");
-//         addBlood();
-//     }
-// }
+    if(id > 10000 && bloodGroupValidation(blood) && usrIdDuplicate(id)) {
+        FILE* file = fopen("yetTocheck.txt", "a");
+        fprintf(file, "%s \t%d \t%s \t%d\n", name, id, blood, bags);
+        printf("Successfully Added Blood\n");
+        fclose(file);
+    } else if(id > 10000 && bloodGroupValidation(blood) && !usrIdDuplicate(id)) {
+        totalDonationIncrement(id, bags);
+        printf("Successfully Added Blood\n");
+    } else {
+        printf("Something Went Wrong. Check Your Form Again.\n");
+        addBlood();
+    }
+}
 
 void bloodBank() {
     FILE* file = fopen("availableBlood.txt", "r");

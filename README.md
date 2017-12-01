@@ -20,7 +20,7 @@ to
 
 ### This Program Includes
 - [x] Admin Panel
-- [ ] Pathologist Panel
+- [X] Pathologist Panel
 - [X] Nurse Panel
 
 ### What can you do with program

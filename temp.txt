@@ -1,4 +1,4 @@
 Name    Id      Group   Bags
-Rafin 	10001 	O+ 	4
-ASIF 	10002 	B+ 	5
-ALIF 	10003 	B+ 	1
+Rafin 	10001 	O+ 	8
+ASIF 	10002 	B+ 	10
+ALIF 	10003 	B+ 	8
