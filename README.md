@@ -4,11 +4,11 @@ This is a simple Blood Bank Management Application For my University Project.
 It is completely written in **C**
 
 ### Important
-** This code will not run in windows opareting system. To compile it on windows change all  
-``` system("clear") ``` to ``` system("cls") ``` 
-and replece ``` sleep() ``` with ``` system("pause") ```
+**This code will not run in windows opareting system. To compile it on windows change all**  
+``` system("clear") ``` **to** ``` system("cls") ``` 
+**and replece** ``` sleep() ``` **with** ``` system("pause") ```
 
-No documention will be available when my WinRAR trial period truly expire **
+**Documention will be available when my WinRAR trial period will truly expire**
 
 ### Features 
 With this application you can manage an entire database for your blood bank program.
