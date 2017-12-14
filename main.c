@@ -234,9 +234,11 @@ void queueToData(int id, int bags, char blood[4], char name[7]) {
         fprintf(dataAdd, "%s \t%d \t%s \t%d\n", name, id, blood, bags);
         printf("Successfully Added Blood\n");
         fclose(dataAdd);
+        availableBloodIncrement(blood, bags);
     } else if(id > 10000 && bloodGroupValidation(blood) && !userIdDuplicate(id)) {
         totalDonationIncrement(id, bags);
         printf("Successfully Added Blood\n");
+        availableBloodIncrement(blood, bags);
     }
 }
 
@@ -314,33 +316,33 @@ void bloodBankQueue() {
     fclose(file);
 }
 
-void availableBloodIncrement(char bld[]) {
-    FILE* file = fopen("availableBlood.txt", "r");
-    FILE* fp = fopen("temp.txt", "w");
-    char line[256];
-    char name[7];
-    char blood[4];
-    int dbid, bags;
+// void availableBloodIncrement(char bld[]) {
+//     FILE* file = fopen("availableBlood.txt", "r");
+//     FILE* fp = fopen("temp.txt", "w");
+//     char line[256];
+//     char name[7];
+//     char blood[4];
+//     int dbid, bags;
 
-    while(fgets(line, sizeof(line), file)) {
-        sscanf(line, "%s %d", &blood, &bags);
+//     while(fgets(line, sizeof(line), file)) {
+//         sscanf(line, "%s %d", &blood, &bags);
 
-        if(strcmp(bld, blood) == 0) fprintf(fp, "%s \t%d\n", blood, ++bags);
-        else fprintf(fp, "%s", line);
-    }
-    fclose(file);
-    fclose(fp);
+//         if(strcmp(bld, blood) == 0) fprintf(fp, "%s \t%d\n", blood, ++bags);
+//         else fprintf(fp, "%s", line);
+//     }
+//     fclose(file);
+//     fclose(fp);
 
-    file = fopen("availableBlood.txt", "w");
-    fp = fopen("temp.txt", "r");
+//     file = fopen("availableBlood.txt", "w");
+//     fp = fopen("temp.txt", "r");
 
-    while(fgets(line, sizeof(line), fp)) {
-        fprintf(file, "%s", line);
-    }
+//     while(fgets(line, sizeof(line), fp)) {
+//         fprintf(file, "%s", line);
+//     }
 
-    fclose(file);
-    fclose(fp);
-}
+//     fclose(file);
+//     fclose(fp);
+// }
 
 void totalDonationIncrement(int id, int bag) {
     FILE* file = fopen("userdata.txt", "r");
@@ -371,6 +373,39 @@ void totalDonationIncrement(int id, int bag) {
     }
     fclose(file);
     fclose(fp);
+}
+
+void availableBloodIncrement(char bld[4], int bag) {
+    FILE* avbFile = fopen("availableBlood.txt", "r");
+    FILE* avbTemp = fopen("tempavb.txt", "w");
+    char line[256];
+    char blood[4];
+    int bags;
+    while(fgets(line, sizeof(line), avbFile)) {
+        sscanf(line, "%s %d", &blood, &bags);
+
+        if(strcmp(bld, blood) == 0) {
+            bags = bags + bag;
+            fprintf(avbTemp, "%s \t%d\n", blood, bags);
+            continue;
+        }
+        else {
+            fprintf(avbTemp, "%s", line);
+        }
+    }
+
+    fclose(avbFile);
+    fclose(avbTemp);
+
+    avbFile = fopen("availableBlood.txt", "w");
+    avbTemp = fopen("tempavb.txt", "r");
+
+    while(fgets(line, sizeof(line), avbTemp)) {
+        fprintf(avbFile, "%s", line);
+    }
+
+    fclose(avbTemp);
+    fclose(avbFile);
 }
 
 
