@@ -58,7 +58,8 @@ int main() {
     // ART
 
     printf("Welcome to Blood Bank Management System.\n");
-    printf("Created By The Student Of Northern University\n");
+    printf("Created By The Student Of");
+    printf(RED " Northern University\n" RESET);
 
     printf("Enter '1' to login: ");
     scanf("%d", &a);
@@ -82,46 +83,40 @@ void admin(int id, char name[7], char blood[4]) {
     scanf("%d", &choice);
     switch (choice) {
         case 1:
-            printf("One\n");
             system("clear"); // system("cls") in windows
             listAllPathologist();
-            printf("Enter C to continue ...\n");
+            printf("\n\nEnter C to continue ...\n");
             scanf(" %c", &ch);
             admin(id, name, blood);
             break;
         case 2:
-            printf("Two\n");
             system("clear"); // system("cls") in windows
             listAllNurse();
-            printf("Enter C to continue ...\n");
+            printf("\n\nEnter C to continue ...\n");
             scanf(" %c", &ch);
             admin(id, name, blood);
             break;
         case 3:
-            printf("Three\n");
             system("clear"); // system("cls") in windows
             addPathologist();
-            printf("Enter C to continue ...\n");
-            scanf(" %c", &ch);
+            sleep(1);
             admin(id, name, blood);
             break;
         case 4:
-            printf("Four\n");
             system("clear"); // system("cls") in windows
             addNurse();
-            printf("Enter C to continue ...\n");
-            scanf(" %c", &ch);
+            sleep(1);
             admin(id, name, blood);
             break;
         case 5:
-            printf("Five\n");
             system("clear"); // system("cls") in windows
-            printf("You are successfully logged out\n");
+            printf("You are successfully logged out\n\n");
             login();
             break;
         default:
-            printf("Incorrect Input\n");
-            admin(id, name[7], blood[4]);
+            printf(RED "Incorrect Input\n" RESET);
+            sleep(1);
+            admin(id, name, blood);
             break;
     }
 }
@@ -177,7 +172,7 @@ void nurse(int id, char name[7], char blood[4]) {
             break;
         default:
             printf("Incorrect Input\n");;
-            nurse(id, name[7], blood[4]);
+            nurse(id, name, blood);
             break;
     }
 }
@@ -221,7 +216,7 @@ void pathologist(int id, char name[7], char blood[4]) {
             break;
         default:
             printf("Incorrect Input\n");
-            pathologist(id, name[7], blood[4]);
+            pathologist(id, name, blood);
             break;
     }
 }
@@ -817,10 +812,8 @@ void login() {
 
 void goodbye() {
     system("clear"); // system("cls") on Windows or DOS
-    char ch;
     printf("Thank You Using Our Service.\n");
-    printf("Enter Q for exit: ");
-    scanf(" %c", ch);
+    sleep(2);
     system("clear");
     exit(0);
 }
