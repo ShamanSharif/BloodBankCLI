@@ -230,10 +230,10 @@ void pathologist(int id, char name[7], char blood[4]) {
 
 void queueToData(int id, int bags, char blood[4], char name[7]) {
     if(id > 10000 && bloodGroupValidation(blood) && userIdDuplicate(id)) {
-        FILE* file = fopen("yetTocheck.txt", "a");
-        fprintf(file, "%s \t%d \t%s \t%d\n", name, id, blood, bags);
+        FILE* dataAdd = fopen("userdata.txt", "a");
+        fprintf(dataAdd, "%s \t%d \t%s \t%d\n", name, id, blood, bags);
         printf("Successfully Added Blood\n");
-        fclose(file);
+        fclose(dataAdd);
     } else if(id > 10000 && bloodGroupValidation(blood) && !userIdDuplicate(id)) {
         totalDonationIncrement(id, bags);
         printf("Successfully Added Blood\n");
@@ -243,61 +243,62 @@ void queueToData(int id, int bags, char blood[4], char name[7]) {
 void varifyBlood(int id, char c[2]) {
 
     if(c == 'V') {
-        FILE* file = fopen("yetTocheck.txt", "r");
-        FILE* fp = fopen("temp2.txt", "w");
+        FILE* vfile = fopen("yetTocheck.txt", "r");
+        FILE* vfp = fopen("temp2.txt", "w");
         char line[256];
         int dbid, bags;
         char blood[4];
         char name[7];
 
-        while(fgets(line, sizeof(line), file)) {
+        while(fgets(line, sizeof(line), vfile)) {
             sscanf(line, "%s %d %s %d", &name, &dbid, &blood, &bags);
             if(id == dbid) {
                 queueToData(dbid, bags, blood, name);
+                break;
             } else {
-                fprintf(fp, "%s", line);
+                fprintf(vfp, "%s", line);
             }
         }
-        fclose(file);
-        fclose(fp);
+        fclose(vfile);
+        fclose(vfp);
 
-        file = fopen("yetTocheck.txt", "w");
-        fp = fopen("temp2.txt", "r");
+        vfile = fopen("yetTocheck.txt", "w");
+        vfp = fopen("temp2.txt", "r");
 
-        while(fgets(line, sizeof(line), fp)) {
-            fprintf(file, "%s", line);
+        while(fgets(line, sizeof(line), vfp)) {
+            fprintf(vfile, "%s", line);
         }
-        fclose(file);
-        fclose(fp);
+        fclose(vfile);
+        fclose(vfp);
     }
 
     else if (c == 'U') {
-        FILE* file = fopen("yetTocheck.txt", "r");
-        FILE* fp = fopen("temp2.txt", "w");
+        FILE* vfile = fopen("yetTocheck.txt", "r");
+        FILE* vfp = fopen("temp2.txt", "w");
         char line[256];
         int dbid, bags;
         char blood[4];
         char name[7];
 
-        while(fgets(line, sizeof(line), file)) {
+        while(fgets(line, sizeof(line), vfile)) {
             sscanf(line, "%s %d %s %d", &name, &dbid, &blood, &bags);
             if(id == dbid) {
                 continue;
             } else {
-                fprintf(fp, "%s", line);
+                fprintf(vfp, "%s", line);
             }
         }
-        fclose(file);
-        fclose(fp);
+        fclose(vfile);
+        fclose(vfp);
 
-        file = fopen("yetTocheck.txt", "w");
-        fp = fopen("temp2.txt", "r");
+        vfile = fopen("yetTocheck.txt", "w");
+        vfp = fopen("temp2.txt", "r");
 
-        while(fgets(line, sizeof(line), fp)) {
-            fprintf(file, "%s", line);
+        while(fgets(line, sizeof(line), vfp)) {
+            fprintf(vfile, "%s", line);
         }
-        fclose(file);
-        fclose(fp);
+        fclose(vfile);
+        fclose(vfp);
     }
     sleep(2);
 }
@@ -408,15 +409,15 @@ int userIdDuplicate(int id) {
     char name[7];
     char blood[4];
     int dbid, bags;
-    FILE* file = fopen("userdata.txt", "r");
+    FILE* checkDup = fopen("userdata.txt", "r");
     char line[256];
     int status = 1;
 
-    while(fgets(line, sizeof(line), file)) {
+    while(fgets(line, sizeof(line), checkDup)) {
         sscanf(line, "%s %d %s %d", &name, &dbid, &blood, &bags);
         if (id == dbid) status = 0;
     }
-    fclose(file);
+    fclose(checkDup);
 
     return status;
 }

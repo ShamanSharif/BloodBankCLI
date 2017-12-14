@@ -2,3 +2,4 @@ Name    Id      Group   Bags
 Rafin 	10001 	O+ 	8
 ASIF 	10002 	B+ 	10
 ALIF 	10003 	B+ 	8
+sohag 	10009 	O+ 	2
