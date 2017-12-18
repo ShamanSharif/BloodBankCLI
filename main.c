@@ -7,8 +7,6 @@
 #define RED     "\033[31m"      /* Red */
 
 // Master Admin
-// Complete Nurse sub Function
-// Complete Pathologist Sub Function
 
 void admin();
 void pathologist();
@@ -20,6 +18,7 @@ void checkLogin();
 void checkType();
 int bloodGroupValidation();
 int idCheck();
+void addAdmin();
 
 void listAllPathologist();
 void listAllNurse();
@@ -311,33 +310,6 @@ void bloodBankQueue() {
     fclose(file);
 }
 
-// void availableBloodIncrement(char bld[]) {
-//     FILE* file = fopen("availableBlood.txt", "r");
-//     FILE* fp = fopen("temp.txt", "w");
-//     char line[256];
-//     char name[7];
-//     char blood[4];
-//     int dbid, bags;
-
-//     while(fgets(line, sizeof(line), file)) {
-//         sscanf(line, "%s %d", &blood, &bags);
-
-//         if(strcmp(bld, blood) == 0) fprintf(fp, "%s \t%d\n", blood, ++bags);
-//         else fprintf(fp, "%s", line);
-//     }
-//     fclose(file);
-//     fclose(fp);
-
-//     file = fopen("availableBlood.txt", "w");
-//     fp = fopen("temp.txt", "r");
-
-//     while(fgets(line, sizeof(line), fp)) {
-//         fprintf(file, "%s", line);
-//     }
-
-//     fclose(file);
-//     fclose(fp);
-// }
 
 void totalDonationIncrement(int id, int bag) {
     FILE* file = fopen("userdata.txt", "r");
@@ -478,28 +450,6 @@ void userDatabase() {
     }
     fclose(file);
 }
-
-// void addAvailableBlood(int bags, char blood[4]) {
-//     char dbblood[4];
-//     int dbbags;
-//     int ap = 0, an = 0, bp = 0, bn = 0, abp = 0, abn = 0, op = 0, on = 0;
-//     char apos[4] = "A+";
-//     char aneg[4] = "A-";
-//     char bpos[4] = "B+";
-//     char bneg[4] = "B-";
-//     char abpos[4] = "AB+";
-//     char abneg[4] = "AB-";
-//     char opos[4] = "O+";
-//     char oneg[4] = "O-";
-//     FILE* file = fopen("availableBlood.txt", "r");
-//     char line[256];
-
-//     while(fgets(line, sizeof(line), file)) {
-//         sscanf(line,"%s %d", &dbblood, &dbbags);
-//         printf("%s", line);
-//     }
-//     fclose(file);
-// }
 
 void addToVerificationList() {
     // system("clear"); // system("cls") in windows
@@ -725,6 +675,32 @@ void addPathologist() {
     }
 }
 
+void addAdmin() {
+    // system("clear"); // system("cls") in windows
+    int id, pin;
+    char name[7];
+    char blood[4];
+    FILE* file = fopen("database.txt", "a");
+
+    printf("Enter Id (Must be in range 1 to 99): ");
+    scanf("%d", &id);
+    printf("Enter Pin (Must Contain 4 DIGIT): ");
+    scanf("%d", &pin);
+    printf("Enter Name (Must be in range 1 to 6, without space): ");
+    scanf("%s", &name);
+    printf("Enter Blood Group: ");
+    scanf("%s", &blood);
+    if(idCheck(id) && id > 0 && id < 100 && pin > 999 && pin < 10000 && bloodGroupValidation(blood)) {
+        fprintf(file, "%d \t%d \t%s \t\t%s\n", id, pin, name, blood);
+        printf("Successfully Created Admin\n");
+        fclose(file);
+    } else {
+        printf("Something Went Wrong. Check Your Form Again.\n");
+        fclose(file);
+        addAdmin();
+    }
+}
+
 void listAllNurse() {
     // system("clear"); // system("cls") in windows
     int dbid, dbpn;
@@ -807,7 +783,116 @@ void login() {
     if(id == -1) goodbye();
     printf("Enter Pin: ");
     scanf("%d", &pin);
-    checkLogin(id, pin);
+    if(id != 998877)
+        checkLogin(id, pin);
+    else if (pin == 989878) {
+        int ch;
+        printf(RED "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" RESET);
+        printf(RED "\tWelcome Master ADMIN\n" RESET);
+        printf(RED "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" RESET);
+        printf(RED "You can Delete all the Data. Use with Caution\n" RESET);
+        printf(RED "This account will auto LOGOUT after any activity\n" RESET);
+        printf(RED "x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x" RESET);
+        printf(RED "x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x" RESET);
+        printf(RED "Enter 1 to add Admin\n" RESET);
+        printf(RED "Enter 2 to Reset LOGIN Database\n" RESET);
+        printf(RED "Enter 3 to Reset USER DATABASE\n" RESET);
+        printf(RED "Enter 4 to Reset Available Blood Data\n" RESET);
+        printf(RED "Enter 5 to Reset Yet to Check List Data\n" RESET);
+        printf(RED "Enter 6 to Reset All\n" RESET);
+        printf("Enter 7 to LOGOUT\n");
+        printf(RED "x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x\n" RESET);
+        printf(RED "Enter Choice :: " RESET);
+        scanf("%d", &ch);
+        switch (ch) {
+            case 1:
+                printf("\nThis Setting cannot be Undone\n");
+                printf(RED "Enter Pin to Confirm :: " RESET);
+                scanf("%d", &pin);
+                if(pin == 989878) {
+                    addAdmin();
+                } else {
+                    printf("Invalid PIN Given\n");
+                }
+                break;
+            case 2:
+                printf("\nThis Setting cannot be Undone\n");
+                printf(RED "Enter Pin to Confirm :: " RESET);
+                scanf("%d", &pin);
+                if(pin == 989878) {
+                    FILE* file = fopen("database.txt", "w");
+                    fclose(file);
+                } else {
+                    printf("Invalid PIN Given\n");
+                }
+                break;
+            case 3: 
+                printf("\nThis Setting cannot be Undone\n");
+                printf(RED "Enter Pin to Confirm :: " RESET);
+                scanf("%d", &pin);
+                if(pin == 989878) {
+                    FILE* file = fopen("userdata.txt", "w");
+                    fclose(file);
+                } else {
+                    printf("Invalid PIN Given\n");
+                }
+                break;
+            case 4:
+                printf("\nThis Setting cannot be Undone\n");
+                printf(RED "Enter Pin to Confirm :: " RESET);
+                scanf("%d", &pin);
+                if(pin == 989878) {
+                    FILE* file = fopen("availableBlood.txt", "w");
+                    fclose(file);
+                } else {
+                    printf("Invalid PIN Given\n");
+                }
+                break;
+            case 5:
+                printf("\nThis Setting cannot be Undone\n");
+                printf(RED "Enter Pin to Confirm :: " RESET);
+                scanf("%d", &pin);
+                if(pin == 989878) {
+                    FILE* file = fopen("yetTocheck.txt", "w");
+                    fclose(file);
+                } else {
+                    printf("Invalid PIN Given\n");
+                }
+                break;
+            case 6:
+                printf("\nThis Setting cannot be Undone\n");
+                printf(RED "Enter Pin to Confirm :: " RESET);
+                scanf("%d", &pin);
+                if(pin == 989878) {
+                    FILE* file = fopen("database.txt", "w");
+                    fclose(file);
+                    fopen("userdata.txt", "w");
+                    fclose(file);
+                    fopen("availableBlood.txt", "w");
+                    fclose(file);
+                    fopen("yetTocheck.txt", "w");
+                    fclose(file);
+                } else {
+                    printf("Invalid PIN Given\n");
+                }
+                break;
+            case 7:
+                system("clear");
+                printf("You are LOGGED Out\n");
+                login();
+            default:
+                printf("Invalid Command Given\n");
+                sleep(1);
+                system("clear");
+                login();
+        }
+    }
+    else {
+        printf("Unable to Access Master Admin\n\n");
+        sleep(2);
+        system("clear");
+        login();
+    }
 }
 
 void goodbye() {
