@@ -787,13 +787,13 @@ void login() {
         checkLogin(id, pin);
     else if (pin == 989878) {
         int ch;
-        printf(RED "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" RESET);
+        printf(RED "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n" RESET);
         printf(RED "\tWelcome Master ADMIN\n" RESET);
-        printf(RED "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" RESET);
+        printf(RED "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n" RESET);
         printf(RED "You can Delete all the Data. Use with Caution\n" RESET);
         printf(RED "This account will auto LOGOUT after any activity\n" RESET);
-        printf(RED "x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x" RESET);
-        printf(RED "x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x" RESET);
+        printf(RED "x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x\n" RESET);
+        printf(RED "x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x\n" RESET);
         printf(RED "Enter 1 to add Admin\n" RESET);
         printf(RED "Enter 2 to Reset LOGIN Database\n" RESET);
         printf(RED "Enter 3 to Reset USER DATABASE\n" RESET);
@@ -814,6 +814,7 @@ void login() {
                 } else {
                     printf("Invalid PIN Given\n");
                 }
+                login();
                 break;
             case 2:
                 printf("\nThis Setting cannot be Undone\n");
@@ -825,8 +826,9 @@ void login() {
                 } else {
                     printf("Invalid PIN Given\n");
                 }
+                login();
                 break;
-            case 3: 
+            case 3:
                 printf("\nThis Setting cannot be Undone\n");
                 printf(RED "Enter Pin to Confirm :: " RESET);
                 scanf("%d", &pin);
@@ -836,6 +838,7 @@ void login() {
                 } else {
                     printf("Invalid PIN Given\n");
                 }
+                login();
                 break;
             case 4:
                 printf("\nThis Setting cannot be Undone\n");
@@ -847,6 +850,7 @@ void login() {
                 } else {
                     printf("Invalid PIN Given\n");
                 }
+                login();
                 break;
             case 5:
                 printf("\nThis Setting cannot be Undone\n");
@@ -858,6 +862,7 @@ void login() {
                 } else {
                     printf("Invalid PIN Given\n");
                 }
+                login();
                 break;
             case 6:
                 printf("\nThis Setting cannot be Undone\n");
@@ -875,16 +880,19 @@ void login() {
                 } else {
                     printf("Invalid PIN Given\n");
                 }
+                login();
                 break;
             case 7:
                 system("clear");
                 printf("You are LOGGED Out\n");
                 login();
+                break;
             default:
                 printf("Invalid Command Given\n");
                 sleep(1);
                 system("clear");
                 login();
+                break;
         }
     }
     else {

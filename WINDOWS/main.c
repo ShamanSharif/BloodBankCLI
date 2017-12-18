@@ -1,12 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include<unistd.h>
-
-#define RESET   "\033[0m"
-#define RED     "\033[31m"      /* Red */
-
-// Master Admin
 
 void admin();
 void pathologist();
@@ -40,30 +34,42 @@ void totalDonationIncrement();
 void totalVarificationIncrement();
 
 int main() {
-    system("clear"); // system("cls") in windows
+    system("cls"); // system("cls") in windows
     int a;
 
     // ART
 
-    printf(RED "██████╗ ██╗      ██████╗  ██████╗ ██████╗     ██████╗  █████╗ ███╗   ██╗██╗  ██╗  \n" RESET );
-    printf(RED "██╔══██╗██║     ██╔═══██╗██╔═══██╗██╔══██╗    ██╔══██╗██╔══██╗████╗  ██║██║ ██╔╝   \n" RESET );
-    printf(RED "██████╔╝██║     ██║   ██║██║   ██║██║  ██║    ██████╔╝███████║██╔██╗ ██║█████╔╝    \n" RESET );
-    printf(RED "██╔══██╗██║     ██║   ██║██║   ██║██║  ██║    ██╔══██╗██╔══██║██║╚██╗██║██╔═██╗    \n" RESET );
-    printf(RED "██████╔╝███████╗╚██████╔╝╚██████╔╝██████╔╝    ██████╔╝██║  ██║██║ ╚████║██║  ██╗   \n" RESET );
-    printf(RED "╚═════╝ ╚══════╝ ╚═════╝  ╚═════╝ ╚═════╝     ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝    \n" RESET );
-    printf("\n");
-    printf("\n");
+    printf("                                                                                                                                                           \n");
+    printf("                                                                         dddddddd                                                                          \n");
+    printf("BBBBBBBBBBBBBBBBB   lllllll                                              d::::::dBBBBBBBBBBBBBBBBB                                      kkkkkkkk           \n");
+    printf("B::::::::::::::::B  l:::::l                                              d::::::dB::::::::::::::::B                                     k::::::k            \n");
+    printf("B::::::BBBBBB:::::B l:::::l                                              d::::::dB::::::BBBBBB:::::B                                    k::::::k            \n");
+    printf("BB:::::B     B:::::Bl:::::l                                              d:::::d BB:::::B     B:::::B                                   k::::::k            \n");
+    printf("  B::::B     B:::::B l::::l    ooooooooooo     ooooooooooo       ddddddddd:::::d   B::::B     B:::::B  aaaaaaaaaaaaa  nnnn  nnnnnnnn     k:::::k    kkkkkkk \n");
+    printf("  B::::B     B:::::B l::::l  oo:::::::::::oo oo:::::::::::oo   dd::::::::::::::d   B::::B     B:::::B  a::::::::::::a n:::nn::::::::nn   k:::::k   k:::::k  \n");
+    printf("  B::::BBBBBB:::::B  l::::l o:::::::::::::::o:::::::::::::::o d::::::::::::::::d   B::::BBBBBB:::::B   aaaaaaaaa:::::an::::::::::::::nn  k:::::k  k:::::k   \n");
+    printf("  B:::::::::::::BB   l::::l o:::::ooooo:::::o:::::ooooo:::::od:::::::ddddd:::::d   B:::::::::::::BB             a::::ann:::::::::::::::n k:::::k k:::::k   \n");
+    printf("  B::::BBBBBB:::::B  l::::l o::::o     o::::o::::o     o::::od::::::d    d:::::d   B::::BBBBBB:::::B     aaaaaaa:::::a  n:::::nnnn:::::n k::::::k:::::k    \n");
+    printf("  B::::B     B:::::B l::::l o::::o     o::::o::::o     o::::od:::::d     d:::::d   B::::B     B:::::B  aa::::::::::::a  n::::n    n::::n k:::::::::::k      \n");
+    printf("  B::::B     B:::::B l::::l o::::o     o::::o::::o     o::::od:::::d     d:::::d   B::::B     B:::::B a::::aaaa::::::a  n::::n    n::::n k:::::::::::k      \n");
+    printf("  B::::B     B:::::B l::::l o::::o     o::::o::::o     o::::od:::::d     d:::::d   B::::B     B:::::Ba::::a    a:::::a  n::::n    n::::n k::::::k:::::k     \n");
+    printf("BB:::::BBBBBB::::::Bl::::::lo:::::ooooo:::::o:::::ooooo:::::od::::::ddddd::::::ddBB:::::BBBBBB::::::Ba::::a    a:::::a  n::::n    n::::nk::::::k k:::::k   \n");
+    printf("B:::::::::::::::::B l::::::lo:::::::::::::::o:::::::::::::::o d:::::::::::::::::dB:::::::::::::::::B a:::::aaaa::::::a  n::::n    n::::nk::::::k  k:::::k   \n");
+    printf("B::::::::::::::::B  l::::::l oo:::::::::::oo oo:::::::::::oo   d:::::::::ddd::::dB::::::::::::::::B   a::::::::::aa:::a n::::n    n::::nk::::::k   k:::::k  \n");
+    printf("BBBBBBBBBBBBBBBBB   llllllll   ooooooooooo     ooooooooooo      ddddddddd   dddddBBBBBBBBBBBBBBBBB     aaaaaaaaaa  aaaa nnnnnn    nnnnnnkkkkkkkk    kkkkkkk \n");
+    printf(" \n");
+    printf(" \n");
 
     // ART
 
     printf("Welcome to Blood Bank Management System.\n");
     printf("Created By The Student Of");
-    printf(RED " Northern University\n" RESET);
+    printf(" Northern University\n");
 
     printf("Enter '1' to login: ");
     scanf("%d", &a);
     if(a == 1) {
-        system("clear"); // system("cls") in windows
+        system("cls"); // system("cls") in windows
         login();
     }
     return 0;
@@ -73,99 +79,90 @@ int main() {
 // Main Function Section, MASTER ADMIN, ADMIN, NURSE, PATHOLOGIST..
 
 void admin(int id, char name[7], char blood[4]) {
-    system("clear"); // system("cls") in windows
+    system("cls"); // system("cls") in windows
     int choice;
-    char ch;
     printf("Welcome %s\n", name);
     printf("================================\n");
     printf("Enter 1 to list all Pathologist \nEnter 2 to list all Nurse \nEnter 3 to Add Pathologist \nEnter 4 to Add Nurse \nEnter 5 for Logout \n\n\n%s@bloodBank:~$ ", name);
     scanf("%d", &choice);
     switch (choice) {
         case 1:
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             listAllPathologist();
-            printf("\n\nEnter C to continue ...\n");
-            scanf(" %c", &ch);
+            system("pause");
             admin(id, name, blood);
             break;
         case 2:
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             listAllNurse();
-            printf("\n\nEnter C to continue ...\n");
-            scanf(" %c", &ch);
+            system("pause");
             admin(id, name, blood);
             break;
         case 3:
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             addPathologist();
-            sleep(1);
+            system("pause");
             admin(id, name, blood);
             break;
         case 4:
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             addNurse();
-            sleep(1);
+            system("pause");
             admin(id, name, blood);
             break;
         case 5:
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             printf("You are successfully logged out\n\n");
             login();
             break;
         default:
-            printf(RED "Incorrect Input\n" RESET);
-            sleep(1);
+            printf("Incorrect Input\n");
+            system("pause");
             admin(id, name, blood);
             break;
     }
 }
 
 void nurse(int id, char name[7], char blood[4]) {
-    system("clear"); // system("cls") in windows
+    system("cls"); // system("cls") in windows
     int choice;
-    char ch;
     printf("Welcome %s\n", name);
     printf("================================\n");
     printf("Enter 1 to add Blood to BloodBank \nEnter 2 to Use Blood from BloodBank \nEnter 3 to List all Donators \nEnter 4 to Check Still to Varified List \nEnter 5 to Check Blood Bank \nEnter 6 for Logout \n\n\n%s@bloodBank:~$ ", name);
     scanf("%d", &choice);
     switch (choice) {
         case 1:
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             addToVerificationList();
-            printf("Enter C to continue ...\n");
-            scanf(" %c", &ch);
+            system("pause");
             nurse(id, name, blood);
             break;
         case 2:
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             widrawBlood();
-            printf("Enter C to continue ...\n");
-            scanf(" %c", &ch);
+            system("pause");
             nurse(id, name, blood);
             break;
         case 3:
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             listDonators();
-            printf("Enter C to continue ...\n");
-            scanf(" %c", &ch);
+            system("pause");
             nurse(id, name, blood);
             break;
         case 4:
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             bloodBankQueue();
-            printf("Enter C to continue ...\n");
-            scanf(" %c", &ch);
+            system("pause");
             nurse(id, name, blood);
             break;
         case 5:
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             bloodBank();
-            printf("Enter C to continue ...\n");
-            scanf(" %c", &ch);
+            system("pause");
             nurse(id, name, blood);
             break;
         case 6:
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             printf("You are successfully logged out\n");
             login();
             break;
@@ -177,7 +174,7 @@ void nurse(int id, char name[7], char blood[4]) {
 }
 
 void pathologist(int id, char name[7], char blood[4]) {
-    system("clear"); // system("cls") in windows
+    system("cls"); // system("cls") in windows
     int choice;
     char ch;
     printf("Welcome %s\n", name);
@@ -186,7 +183,7 @@ void pathologist(int id, char name[7], char blood[4]) {
     scanf("%d", &choice);
     switch (choice) {
         case 1:
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             bloodBankQueue();
             printf("Enter V to Varify or C to continue ...\n");
             scanf(" %c", &ch);
@@ -200,16 +197,13 @@ void pathologist(int id, char name[7], char blood[4]) {
             pathologist(id, name, blood);
             break;
         case 2:
-            printf("Two\n");
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             bloodBank();
-            printf("Enter C to continue ...\n");
-            scanf(" %c", &ch);
+            system("pause");
             pathologist(id, name, blood);
             break;
         case 3:
-            printf("Three\n");
-            system("clear"); // system("cls") in windows
+            system("cls"); // system("cls") in windows
             printf("You are successfully logged out\n");
             login();
             break;
@@ -296,7 +290,7 @@ void varifyBlood(int id, char c[2]) {
         fclose(vfile);
         fclose(vfp);
     }
-    sleep(2);
+    system("pause");
 }
 
 
@@ -452,7 +446,7 @@ void userDatabase() {
 }
 
 void addToVerificationList() {
-    // system("clear"); // system("cls") in windows
+    // system("cls"); // system("cls") in windows
     char name[7];
     char blood[4];
     int id, bags;
@@ -483,7 +477,7 @@ void addToVerificationList() {
 }
 
 void addBlood() {
-    // system("clear"); // system("cls") in windows
+    // system("cls"); // system("cls") in windows
     char name[7];
     char blood[4];
     int id, bags;
@@ -624,7 +618,7 @@ int bloodGroupValidation(char blood[4]) {
 }
 
 void addNurse() {
-    // system("clear"); // system("cls") in windows
+    // system("cls"); // system("cls") in windows
     int id, pin;
     char name[7];
     char blood[4];
@@ -650,7 +644,7 @@ void addNurse() {
 }
 
 void addPathologist() {
-    // system("clear"); // system("cls") in windows
+    // system("cls"); // system("cls") in windows
     int id, pin;
     char name[7];
     char blood[4];
@@ -676,7 +670,7 @@ void addPathologist() {
 }
 
 void addAdmin() {
-    // system("clear"); // system("cls") in windows
+    // system("cls"); // system("cls") in windows
     int id, pin;
     char name[7];
     char blood[4];
@@ -702,7 +696,7 @@ void addAdmin() {
 }
 
 void listAllNurse() {
-    // system("clear"); // system("cls") in windows
+    // system("cls"); // system("cls") in windows
     int dbid, dbpn;
     char name[7];
     char blood[4];
@@ -720,7 +714,7 @@ void listAllNurse() {
 }
 
 void listAllPathologist() {
-    // system("clear"); // system("cls") in windows
+    // system("cls"); // system("cls") in windows
     int dbid, dbpn;
     char name[7];
     char blood[4];
@@ -776,7 +770,7 @@ void checkLogin(int id, int pin) {
 }
 
 void login() {
-    // system("clear"); // system("cls") in windows
+    // system("cls"); // system("cls") in windows
     int id, pin;
     printf("Enter ID (Or -1 to Exit): ");
     scanf("%d", &id);
@@ -787,37 +781,38 @@ void login() {
         checkLogin(id, pin);
     else if (pin == 989878) {
         int ch;
-        printf(RED "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" RESET);
-        printf(RED "\tWelcome Master ADMIN\n" RESET);
-        printf(RED "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" RESET);
-        printf(RED "You can Delete all the Data. Use with Caution\n" RESET);
-        printf(RED "This account will auto LOGOUT after any activity\n" RESET);
-        printf(RED "x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x" RESET);
-        printf(RED "x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x" RESET);
-        printf(RED "Enter 1 to add Admin\n" RESET);
-        printf(RED "Enter 2 to Reset LOGIN Database\n" RESET);
-        printf(RED "Enter 3 to Reset USER DATABASE\n" RESET);
-        printf(RED "Enter 4 to Reset Available Blood Data\n" RESET);
-        printf(RED "Enter 5 to Reset Yet to Check List Data\n" RESET);
-        printf(RED "Enter 6 to Reset All\n" RESET);
+        printf("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
+        printf("\tWelcome Master ADMIN\n");
+        printf("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
+        printf("You can Delete all the Data. Use with Caution\n");
+        printf("This account will auto LOGOUT after any activity\n");
+        printf("x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x\n");
+        printf("x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x\n");
+        printf("Enter 1 to add Admin\n");
+        printf("Enter 2 to Reset LOGIN Database\n");
+        printf("Enter 3 to Reset USER DATABASE\n");
+        printf("Enter 4 to Reset Available Blood Data\n");
+        printf("Enter 5 to Reset Yet to Check List Data\n");
+        printf("Enter 6 to Reset All\n");
         printf("Enter 7 to LOGOUT\n");
-        printf(RED "x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x\n" RESET);
-        printf(RED "Enter Choice :: " RESET);
+        printf("x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x\n");
+        printf("Enter Choice :: ");
         scanf("%d", &ch);
         switch (ch) {
             case 1:
                 printf("\nThis Setting cannot be Undone\n");
-                printf(RED "Enter Pin to Confirm :: " RESET);
+                printf("Enter Pin to Confirm :: ");
                 scanf("%d", &pin);
                 if(pin == 989878) {
                     addAdmin();
                 } else {
                     printf("Invalid PIN Given\n");
                 }
+                login();
                 break;
             case 2:
                 printf("\nThis Setting cannot be Undone\n");
-                printf(RED "Enter Pin to Confirm :: " RESET);
+                printf("Enter Pin to Confirm :: ");
                 scanf("%d", &pin);
                 if(pin == 989878) {
                     FILE* file = fopen("database.txt", "w");
@@ -825,10 +820,11 @@ void login() {
                 } else {
                     printf("Invalid PIN Given\n");
                 }
+                login();
                 break;
-            case 3: 
+            case 3:
                 printf("\nThis Setting cannot be Undone\n");
-                printf(RED "Enter Pin to Confirm :: " RESET);
+                printf("Enter Pin to Confirm :: ");
                 scanf("%d", &pin);
                 if(pin == 989878) {
                     FILE* file = fopen("userdata.txt", "w");
@@ -836,10 +832,11 @@ void login() {
                 } else {
                     printf("Invalid PIN Given\n");
                 }
+                login();
                 break;
             case 4:
                 printf("\nThis Setting cannot be Undone\n");
-                printf(RED "Enter Pin to Confirm :: " RESET);
+                printf("Enter Pin to Confirm :: ");
                 scanf("%d", &pin);
                 if(pin == 989878) {
                     FILE* file = fopen("availableBlood.txt", "w");
@@ -847,10 +844,11 @@ void login() {
                 } else {
                     printf("Invalid PIN Given\n");
                 }
+                login();
                 break;
             case 5:
                 printf("\nThis Setting cannot be Undone\n");
-                printf(RED "Enter Pin to Confirm :: " RESET);
+                printf("Enter Pin to Confirm :: ");
                 scanf("%d", &pin);
                 if(pin == 989878) {
                     FILE* file = fopen("yetTocheck.txt", "w");
@@ -858,10 +856,11 @@ void login() {
                 } else {
                     printf("Invalid PIN Given\n");
                 }
+                login();
                 break;
             case 6:
                 printf("\nThis Setting cannot be Undone\n");
-                printf(RED "Enter Pin to Confirm :: " RESET);
+                printf("Enter Pin to Confirm :: ");
                 scanf("%d", &pin);
                 if(pin == 989878) {
                     FILE* file = fopen("database.txt", "w");
@@ -875,30 +874,33 @@ void login() {
                 } else {
                     printf("Invalid PIN Given\n");
                 }
+                login();
                 break;
             case 7:
-                system("clear");
+                system("cls");
                 printf("You are LOGGED Out\n");
                 login();
+                break;
             default:
                 printf("Invalid Command Given\n");
-                sleep(1);
-                system("clear");
+                system("pause");
+                system("cls");
                 login();
+                break;
         }
     }
     else {
         printf("Unable to Access Master Admin\n\n");
-        sleep(2);
-        system("clear");
+        system("pause");
+        system("cls");
         login();
     }
 }
 
 void goodbye() {
-    system("clear"); // system("cls") on Windows or DOS
+    system("cls"); // system("cls") on Windows or DOS
     printf("Thank You Using Our Service.\n");
-    sleep(2);
-    system("clear");
+    system("pause");
+    system("cls");
     exit(0);
 }

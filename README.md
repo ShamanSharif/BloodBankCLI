@@ -4,11 +4,9 @@ This is a simple Blood Bank Management Application For my University Project.
 It is completely written in **C**
 
 ### Important
-**This code will not run in windows opareting system. To compile it on windows change all**  
-``` system("clear") ``` **to** ``` system("cls") ``` 
-**and replece** ``` sleep() ``` **with** ``` system("pause") ```
+**To Run This Program on Windows. Use The main.c in WINDOWS Folder. (Cradit Goes to JOYA)**
 
-**Documention will be available when my WinRAR trial period will truly expire**
+**Documention will be available Soon**
 
 ### Features 
 With this application you can manage an entire database for your blood bank program.
@@ -30,11 +28,13 @@ to
 - [X] Pathologist Panel
 - [X] Nurse Panel
 
+It also has a Master Admin Panel to Add Admin and Reset Data.
+
 ### What can you do with program
 
 
 ### Students are on this Project
-- Ashrifa Ashrab Joya 
-- Savrin Sharif 
-- Shaman Sharif 
-- Tanjina Akter Sumi 
+- Ashrifa Ashrab Joya - Tester
+- Savrin Sharif - Tester
+- Shaman Sharif - Programmer
+- Tanjina Akter Sumi - Tester
