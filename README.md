@@ -35,6 +35,6 @@ It also has a Master Admin Panel to Add Admin and Reset Data.
 
 ### Students are on this Project
 - Ashrifa Ashrab Joya - Tester
-- Savrin Sharif - Tester
+- Savrin Sharif - ""
 - Shaman Sharif - Programmer
-- Tanjina Akter Sumi - Tester
+- Tanjina Akter Sumi - ""
