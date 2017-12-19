@@ -4,7 +4,7 @@ This is a simple Blood Bank Management Application For my University Project.
 It is completely written in **C**
 
 ### Important
-**To Run This Program on Windows. Use The main.c in WINDOWS Folder. (Cradit Goes to JOYA)**
+**To Run This Program on Windows. Use The main.c in WINDOWS Folder. (Credit Goes to JOYA)**
 
 **Documention will be available Soon**
 
