@@ -530,13 +530,15 @@ void widrawBlood() {
     char line[256];
     char blood[4];
     int bags;
+    int status = 0;
 
     while(fgets(line, sizeof(line), file)) {
         sscanf(line, "%s %d", &blood, &bags);
 
-        if(strcmp(bld, blood) == 0) {
+        if(strcmp(bld, blood) == 0 && bags > bag) {
             bags = bags - bag;
             fprintf(fp, "%s \t%d\n", blood, bags);
+            status = 1;
         }
         else fprintf(fp, "%s", line);
     }
@@ -553,7 +555,7 @@ void widrawBlood() {
     fclose(file);
     fclose(fp);
 
-    printf("Widrawn Completed\n");
+    (status == 1) ? printf("Widrawn Completed\n") : printf("Not Enough Blood\n");
 }
 
 void listDonators() {
