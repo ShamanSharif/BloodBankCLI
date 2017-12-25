@@ -24,6 +24,7 @@ void listAllPathologist();
 void listAllNurse();
 void addPathologist();
 void addNurse();
+void deleteUser();
 
 void addToVerificationList();
 void listDonators();
@@ -76,9 +77,10 @@ void admin(int id, char name[7], char blood[4]) {
     system("clear"); // system("cls") in windows
     int choice;
     char ch;
+    int did;
     printf("Welcome %s\n", name);
     printf("================================\n");
-    printf("Enter 1 to list all Pathologist \nEnter 2 to list all Nurse \nEnter 3 to Add Pathologist \nEnter 4 to Add Nurse \nEnter 5 for Logout \n\n\n%s@bloodBank:~$ ", name);
+    printf("Enter 1 to list all Pathologist \nEnter 2 to list all Nurse \nEnter 3 to Add Pathologist \nEnter 4 to Delete Pathologist \nEnter 5 to Add Nurse \nEnter 6 to Delete Nurse \nEnter 7 for Logout \n\n\n%s@bloodBank:~$ ", name);
     scanf("%d", &choice);
     switch (choice) {
         case 1:
@@ -102,12 +104,30 @@ void admin(int id, char name[7], char blood[4]) {
             admin(id, name, blood);
             break;
         case 4:
+            system("clear");
+            printf("Enter ID: ");
+            scanf("%d", &did);
+            if(did > 99 && did < 1000) deleteUser(did);
+            else printf("Invalid ID Given\n");
+            sleep(1);
+            admin(id, name, blood);
+            break;
+        case 5:
             system("clear"); // system("cls") in windows
             addNurse();
             sleep(1);
             admin(id, name, blood);
             break;
-        case 5:
+        case 6:
+            system("clear");
+            printf("Enter ID: ");
+            scanf("%d", &did);
+            if(did > 1000 && did < 10000) deleteUser(did);
+            else printf("Invalid ID Given\n");
+            sleep(1);
+            admin(id, name, blood);
+            break;
+        case 7:
             system("clear"); // system("cls") in windows
             printf("You are successfully logged out\n\n");
             login();
@@ -626,7 +646,7 @@ int bloodGroupValidation(char blood[4]) {
 }
 
 void addNurse() {
-    // system("clear"); // system("cls") in windows
+    system("clear"); // system("cls") in windows
     int id, pin;
     char name[7];
     char blood[4];
@@ -652,7 +672,7 @@ void addNurse() {
 }
 
 void addPathologist() {
-    // system("clear"); // system("cls") in windows
+    system("clear"); // system("cls") in windows
     int id, pin;
     char name[7];
     char blood[4];
@@ -675,6 +695,40 @@ void addPathologist() {
         fclose(file);
         addPathologist();
     }
+}
+
+void deleteUser(int id) {
+    FILE* file = fopen("database.txt", "r");
+    FILE* fp = fopen("temp.txt", "w");
+    char line[256];
+    char name[7];
+    char blood[4];
+    int dbid, dbpn;
+    int status = 0;
+
+    while(fgets(line, sizeof(line), file)) {
+        sscanf(line, "%d %d %s %s", &dbid, &dbpn, &name, &blood);
+
+        if(id == dbid) {
+            status = 1;
+            continue;
+        }
+        else fprintf(fp, "%s", line);
+    }
+    fclose(file);
+    fclose(fp);
+
+    file = fopen("database.txt", "w");
+    fp = fopen("temp.txt", "r");
+
+    while(fgets(line, sizeof(line), fp)) {
+        fprintf(file, "%s", line);
+    }
+
+    fclose(file);
+    fclose(fp);
+
+    (status == 1) ? printf("Successfully Deleted ID#%d\n", id) : printf("ID#%d Not Found\n", id);
 }
 
 void addAdmin() {
@@ -779,7 +833,7 @@ void checkLogin(int id, int pin) {
 
 void login() {
     // system("clear"); // system("cls") in windows
-    int id, pin;
+    int id, pin, did;
     printf("Enter ID (Or -1 to Exit): ");
     scanf("%d", &id);
     if(id == -1) goodbye();
@@ -796,13 +850,14 @@ void login() {
         printf(RED "This account will auto LOGOUT after any activity\n" RESET);
         printf(RED "x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x\n" RESET);
         printf(RED "x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x\n" RESET);
-        printf(RED "Enter 1 to add Admin\n" RESET);
-        printf(RED "Enter 2 to Reset LOGIN Database\n" RESET);
-        printf(RED "Enter 3 to Reset USER DATABASE\n" RESET);
-        printf(RED "Enter 4 to Reset Available Blood Data\n" RESET);
-        printf(RED "Enter 5 to Reset Yet to Check List Data\n" RESET);
-        printf(RED "Enter 6 to Reset All\n" RESET);
-        printf("Enter 7 to LOGOUT\n");
+        printf(RED "Enter <1> to add Admin\n" RESET);
+        printf(RED "Enter <2> to Delete Admin\n" RESET);
+        printf(RED "Enter <3> to Reset LOGIN Database\n" RESET);
+        printf(RED "Enter <4> to Reset USER DATABASE\n" RESET);
+        printf(RED "Enter <5> to Reset Available Blood Data\n" RESET);
+        printf(RED "Enter <6> to Reset Yet to Check List Data\n" RESET);
+        printf(RED "Enter <7> to Reset All\n" RESET);
+        printf("Enter <8> to LOGOUT\n");
         printf(RED "x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x\n" RESET);
         printf(RED "Enter Choice :: " RESET);
         scanf("%d", &ch);
@@ -823,8 +878,10 @@ void login() {
                 printf(RED "Enter Pin to Confirm :: " RESET);
                 scanf("%d", &pin);
                 if(pin == 989878) {
-                    FILE* file = fopen("database.txt", "w");
-                    fclose(file);
+                    printf("Enter Admin ID to Delete: ");
+                    scanf("%d", &did);
+                    if(did > 10 && did < 100) deleteUser(did);
+                    else printf("Invalid ID\n");
                 } else {
                     printf("Invalid PIN Given\n");
                 }
@@ -835,7 +892,7 @@ void login() {
                 printf(RED "Enter Pin to Confirm :: " RESET);
                 scanf("%d", &pin);
                 if(pin == 989878) {
-                    FILE* file = fopen("userdata.txt", "w");
+                    FILE* file = fopen("database.txt", "w");
                     fclose(file);
                 } else {
                     printf("Invalid PIN Given\n");
@@ -847,7 +904,7 @@ void login() {
                 printf(RED "Enter Pin to Confirm :: " RESET);
                 scanf("%d", &pin);
                 if(pin == 989878) {
-                    FILE* file = fopen("availableBlood.txt", "w");
+                    FILE* file = fopen("userdata.txt", "w");
                     fclose(file);
                 } else {
                     printf("Invalid PIN Given\n");
@@ -859,7 +916,7 @@ void login() {
                 printf(RED "Enter Pin to Confirm :: " RESET);
                 scanf("%d", &pin);
                 if(pin == 989878) {
-                    FILE* file = fopen("yetTocheck.txt", "w");
+                    FILE* file = fopen("availableBlood.txt", "w");
                     fclose(file);
                 } else {
                     printf("Invalid PIN Given\n");
@@ -867,6 +924,18 @@ void login() {
                 login();
                 break;
             case 6:
+                printf("\nThis Setting cannot be Undone\n");
+                printf(RED "Enter Pin to Confirm :: " RESET);
+                scanf("%d", &pin);
+                if(pin == 989878) {
+                    FILE* file = fopen("yetTocheck.txt", "w");
+                    fclose(file);
+                } else {
+                    printf("Invalid PIN Given\n");
+                }
+                login();
+                break;
+            case 7:
                 printf("\nThis Setting cannot be Undone\n");
                 printf(RED "Enter Pin to Confirm :: " RESET);
                 scanf("%d", &pin);
@@ -884,7 +953,7 @@ void login() {
                 }
                 login();
                 break;
-            case 7:
+            case 8:
                 system("clear");
                 printf("You are LOGGED Out\n");
                 login();
